@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@components": ["libs/components/src/index.ts"],
       "@styles": ["libs/styles/src/index.ts"]
     }
   },
