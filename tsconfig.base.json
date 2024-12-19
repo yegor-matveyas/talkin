@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@components": ["libs/components/src/index.ts"],
-      "@styles": ["libs/styles/src/index.ts"]
+      "@styles": ["libs/styles/src/index.ts"],
+      "@types": ["libs/types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
