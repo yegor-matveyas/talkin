@@ -1,6 +1,6 @@
 import cx from 'classnames'
 
-import { TypographyProps } from './Typography.types'
+import type { TypographyProps } from './Typography.types'
 import { TypographyElements } from './Typography.utils'
 
 import styles from './Typography.module.scss'

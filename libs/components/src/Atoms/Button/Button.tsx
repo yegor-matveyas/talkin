@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import cx from 'classnames'
 
-import { ButtonProps } from './Button.types'
+import type { ButtonProps } from './Button.types'
 
 import styles from './Button.module.scss'
 
@@ -11,6 +11,8 @@ export default function Button({
   negative = false,
   disabled = false,
   children,
+  className = '',
+  style = {},
   ...rest
 }: ButtonProps) {
   const buttonProps = useMemo(() => {
@@ -27,7 +29,8 @@ export default function Button({
     <button
       type={type}
       disabled={disabled}
-      className={cx(styles.button, styles[variant], { [styles.negative]: negative })}
+      className={cx(styles.button, styles[variant], { [styles.negative]: negative }, className)}
+      style={style}
       {...buttonProps}
     >
       {children}
