@@ -1,0 +1,30 @@
+@use 'base/variables' as *;
+
+.typography {
+  color: $greys-5;
+}
+
+.title {
+  font-size: $font-size-title;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: $font-size-subtitle;
+}
+
+.text {
+  font-size: $font-size-text;
+}
+
+.caption {
+  font-size: $font-size-caption;
+}
+
+.primary {
+  color: $primary;
+}
+
+.negative {
+  color: $negatives-0;
+}
