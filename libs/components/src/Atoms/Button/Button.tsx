@@ -6,10 +6,10 @@ import type { ButtonProps } from './Button.types'
 import styles from './Button.module.scss'
 
 export default function Button({
+  negative,
+  disabled,
   type = 'button',
   variant = 'contained',
-  negative = false,
-  disabled = false,
   children,
   className = '',
   style = {},

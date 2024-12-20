@@ -6,8 +6,8 @@ import { TypographyElements } from './Typography.utils'
 import styles from './Typography.module.scss'
 
 export default function Typography({
-  primary = false,
-  negative = false,
+  primary,
+  negative,
   variant,
   children = '',
   className = '',
