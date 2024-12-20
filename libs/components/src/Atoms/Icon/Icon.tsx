@@ -5,7 +5,7 @@ import CloseIcon from './CloseIcon'
 import MenuIcon from './MenuIcon'
 import SearchIcon from './SearchIcon'
 
-type IconName = 'close' | 'menu' | 'search'
+export type IconName = 'close' | 'menu' | 'search'
 
 interface IconProps extends ComponentDefaultProps {
   name: IconName

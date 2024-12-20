@@ -1,6 +1,8 @@
 import { useMemo } from 'react'
 import cx from 'classnames'
 
+import IconButton from './IconButton/IconButton'
+
 import type { ButtonProps } from './Button.types'
 
 import styles from './Button.module.scss'
@@ -37,3 +39,5 @@ export default function Button({
     </button>
   )
 }
+
+Button.Icon = IconButton

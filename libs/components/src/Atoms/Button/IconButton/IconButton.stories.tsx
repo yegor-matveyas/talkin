@@ -1,18 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import Button from './Button'
+import IconButton from './IconButton'
 
-const meta: Meta<typeof Button> = {
-  component: Button,
-  title: 'Atoms/Button',
+const meta: Meta<typeof IconButton> = {
+  component: IconButton,
+  title: 'Atoms/Button/Icon',
 }
 export default meta
-type Story = StoryObj<typeof Button>
+type Story = StoryObj<typeof IconButton>
 
 export const Contained: Story = {
   args: {
     negative: false,
     disabled: false,
-    children: 'I am a button',
+    size: 'md',
+    name: 'close',
     variant: 'contained',
   },
 }
@@ -24,9 +25,9 @@ export const Outlined: Story = {
   },
 }
 
-export const Text: Story = {
+export const Pure: Story = {
   args: {
     ...Outlined.args,
-    variant: 'text',
+    variant: 'pure',
   },
 }

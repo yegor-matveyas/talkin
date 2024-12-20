@@ -1,16 +1,24 @@
 @use 'base/variables' as *;
 
 .button {
-  cursor: pointer;
+  box-sizing: content-box;
+  padding: 6px;
 
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: $font-size-text;
+  &.sm {
+    padding: 2px;
+  }
 
+  border-radius: 50%;
   border: 2px solid transparent;
 
   color: $primary;
   background-color: transparent;
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:disabled {
     cursor: not-allowed;
@@ -58,6 +66,7 @@
   }
 
   &.outlined {
+    color: $primary;
     border-color: $primary;
 
     &:hover {
@@ -82,8 +91,8 @@
 
       &:active {
         color: $white;
-        border-color: $negatives-2;
         background-color: $negatives-2;
+        border-color: $negatives-2;
       }
     }
 
@@ -102,11 +111,13 @@
     }
   }
 
-  &.text {
+  &.pure {
+    color: $primary;
+
     &:hover {
-      color: $secondary;
       background-color: $greys-0;
       border-color: $greys-0;
+      color: $secondary;
     }
 
     &:active {
@@ -119,9 +130,9 @@
       color: $negatives-0;
 
       &:hover {
-        color: $negatives-1;
         background-color: $greys-0;
         border-color: $greys-0;
+        color: $negatives-1;
       }
 
       &:active {
@@ -135,10 +146,25 @@
       color: $greys-3;
 
       &:hover {
+        background-color: $greys-0;
+        border-color: $greys-0;
         color: $greys-2;
+      }
+
+      &:active {
         background-color: $greys-0;
         border-color: $greys-0;
       }
     }
   }
+}
+
+.md {
+  height: 26px;
+  width: 26px;
+}
+
+.sm {
+  height: 14px;
+  width: 14px;
 }
