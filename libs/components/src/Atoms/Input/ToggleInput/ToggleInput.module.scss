@@ -1,0 +1,48 @@
+@use 'base/variables' as *;
+
+.toggle {
+  position: relative;
+  width: 0;
+  height: 0;
+  cursor: pointer;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    display: block;
+
+    width: 28px;
+    height: 16px;
+  }
+
+  &::before {
+    background-color: $greys-3;
+    height: 16px;
+    width: 28px;
+    border-radius: 8px;
+  }
+
+  &::after {
+    border-radius: 50%;
+    background-color: $greys-4;
+
+    width: 24px;
+    height: 24px;
+    top: -4px;
+    left: -10px;
+    transition: left 0.4s;
+  }
+
+  &.checked {
+    &::before {
+      background-color: $secondary;
+    }
+
+    &::after {
+      background-color: $primary;
+      left: 18px;
+      transition: left 0.4s;
+    }
+  }
+}
