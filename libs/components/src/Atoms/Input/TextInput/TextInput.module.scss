@@ -1,0 +1,31 @@
+@use 'base/variables' as *;
+
+.text {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: $font-size-text;
+
+  border: 2px solid $greys-4;
+
+  &:hover {
+    box-shadow: 0 0 1px 1px $secondary;
+    border-color: $primary;
+  }
+
+  &:focus-within {
+    border-color: $primary;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    border-color: $greys-3;
+  }
+}
+
+.fullwidth {
+  width: 100%;
+}
+
+.multiline {
+  resize: vertical;
+}
