@@ -2,10 +2,11 @@ import { FC } from 'react'
 import { ComponentDefaultProps } from '@types'
 
 import CloseIcon from './CloseIcon'
+import LockIcon from './LockIcon'
 import MenuIcon from './MenuIcon'
 import SearchIcon from './SearchIcon'
 
-export type IconName = 'close' | 'menu' | 'search'
+export type IconName = 'close' | 'lock' | 'menu' | 'search'
 
 interface IconProps extends ComponentDefaultProps {
   name: IconName
@@ -13,6 +14,7 @@ interface IconProps extends ComponentDefaultProps {
 
 const icons: Record<IconName, FC<ComponentDefaultProps>> = {
   close: CloseIcon,
+  lock: LockIcon,
   menu: MenuIcon,
   search: SearchIcon,
 }

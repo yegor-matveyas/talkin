@@ -14,6 +14,12 @@ export const Close: Story = {
   },
 }
 
+export const Lock: Story = {
+  args: {
+    name: 'lock',
+  },
+}
+
 export const Menu: Story = {
   args: {
     name: 'menu',
