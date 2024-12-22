@@ -52,6 +52,7 @@ export default function TextInput({
           {
             [styles.negative]: isInputNegative,
             [styles.multiline]: multiline,
+            [styles.resizable]: 'resizable' in rest && rest.resizable,
           },
           className
         )}

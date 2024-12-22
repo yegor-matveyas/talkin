@@ -19,5 +19,6 @@ export type DefaultTextInputProps = {
 
 export type MultilineTextInputProps = {
   multiline: true
+  resizable?: boolean
   rows?: number
 }

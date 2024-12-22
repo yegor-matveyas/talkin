@@ -8,8 +8,8 @@ interface CounterProps extends ComponentDefaultProps {
 }
 
 export default function Counter({ value = 0, maxlength, className = '', style = {} }: CounterProps) {
-  const isWarning = value / maxlength > 0.8 && value !== maxlength
-  const isNegative = value === maxlength
+  const isWarning = value / maxlength > 0.8 && value < maxlength
+  const isNegative = value >= maxlength
 
   return (
     <Typography warning={isWarning} negative={isNegative} variant="caption" className={className} style={style}>

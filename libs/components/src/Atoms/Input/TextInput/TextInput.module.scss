@@ -113,31 +113,36 @@
       }
     }
   }
+
+  .multiline {
+    resize: none;
+    height: unset;
+
+    &.resizable {
+      resize: vertical;
+    }
+  }
+
+  .footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin: 4px;
+
+    .error {
+      flex-grow: 1;
+    }
+
+    &.error {
+      justify-content: space-between;
+    }
+  }
+
+  .counter {
+    justify-self: flex-end;
+  }
 }
 
 .fullwidth {
   width: 100%;
-}
-
-.multiline {
-  resize: vertical;
-}
-
-.footer {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin: 4px;
-
-  .error {
-    flex-grow: 1;
-  }
-
-  &.error {
-    justify-content: space-between;
-  }
-}
-
-.counter {
-  justify-self: flex-end;
 }
