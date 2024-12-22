@@ -4,14 +4,15 @@ export type TextInputProps = {
   disabled?: boolean
   negative?: boolean
   fullWidth?: boolean
+  placeholder?: string
   value?: string
   onChange: (newValue: string) => void
 } & (DefaultTextInputProps | MultilineTextInputProps) &
   ComponentDefaultProps
 
 export type DefaultTextInputProps = {
-  multiline: false | undefined
-  inputType: 'text' | 'password' | 'email'
+  multiline?: false | undefined
+  inputType?: 'text' | 'password' | 'email'
 }
 
 export type MultilineTextInputProps = {

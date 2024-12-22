@@ -8,6 +8,7 @@ import styles from './Typography.module.scss'
 export default function Typography({
   primary,
   negative,
+  warning,
   variant,
   children = '',
   className = '',
@@ -20,7 +21,7 @@ export default function Typography({
       className={cx(
         styles.typography,
         styles[variant],
-        { [styles.primary]: primary, [styles.negative]: negative },
+        { [styles.primary]: primary, [styles.negative]: negative, [styles.warning]: warning },
         className
       )}
       style={style}
