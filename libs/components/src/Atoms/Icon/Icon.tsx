@@ -1,10 +1,13 @@
 import { FC } from 'react'
+import cx from 'classnames'
 import { ComponentDefaultProps } from '@types'
 
 import CloseIcon from './CloseIcon'
 import LockIcon from './LockIcon'
 import MenuIcon from './MenuIcon'
 import SearchIcon from './SearchIcon'
+
+import styles from './Icon.module.scss'
 
 export type IconName = 'close' | 'lock' | 'menu' | 'search'
 
@@ -21,5 +24,5 @@ const icons: Record<IconName, FC<ComponentDefaultProps>> = {
 
 export default function Icon({ name, className, style }: IconProps) {
   const IconElement = icons[name]
-  return <IconElement className={className} style={style} />
+  return <IconElement className={cx(className, styles.icon)} style={style} />
 }
