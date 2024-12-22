@@ -12,6 +12,7 @@ export const Title: Story = {
   args: {
     primary: false,
     negative: false,
+    warning: false,
     variant: 'title',
     children: 'Typography Title',
   },
