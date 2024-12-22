@@ -1,24 +1,117 @@
 @use 'base/variables' as *;
 
-.text {
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: $font-size-text;
+.wrapper {
+  position: relative;
 
-  border: 2px solid $greys-4;
+  display: inline-flex;
+  flex-direction: column;
 
-  &:hover {
-    box-shadow: 0 0 1px 1px $secondary;
-    border-color: $primary;
+  .label {
+    pointer-events: none;
+    user-select: none;
+
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    position: absolute;
+
+    max-width: calc(100% - 40px);
+    height: 24px;
+    left: 16px;
+    top: 10px;
+
+    background-color: inherit;
+    transition: all 0.3s;
   }
 
-  &:focus-within {
-    border-color: $primary;
-  }
+  .input {
+    border: 2px solid $greys-4;
+    border-radius: 6px;
 
-  &:disabled {
-    cursor: not-allowed;
-    border-color: $greys-3;
+    width: calc(100% - 32px);
+    height: 24px;
+    padding: 8px 14px;
+
+    font-size: inherit;
+
+    &::placeholder {
+      color: transparent;
+      user-select: none;
+    }
+
+    &:hover:not(:focus) {
+      box-shadow: 0 0 1px 1px $secondary;
+      border-color: $primary;
+
+      &:not(:placeholder-shown) ~ .label {
+        color: $primary;
+        transition-duration: 0s;
+      }
+    }
+
+    &:focus {
+      outline: thin solid $secondary;
+      border-color: $primary;
+
+      & ~ .label {
+        color: $primary;
+      }
+    }
+
+    &:focus ~ .label,
+    &:not(:placeholder-shown) ~ .label {
+      background-color: inherit;
+      font-size: $font-size-caption;
+
+      height: 18px;
+      top: -8px;
+      left: 16px;
+      padding: 0 4px;
+      transition: all 0.3s;
+    }
+
+    &.negative {
+      border-color: $negatives-0;
+
+      &:focus {
+        outline: thin solid $negatives-1;
+
+        & ~ .label {
+          color: $negatives-0;
+        }
+      }
+
+      &:not(:placeholder-shown):not(:focus) ~ .label {
+        color: $negatives-0;
+      }
+
+      &:hover:not(:focus) {
+        box-shadow: 0 0 1px 1px $negatives-2;
+        border-color: $negatives-1;
+      }
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      border-color: $greys-4;
+
+      & ~ .label,
+      &:not(:placeholder-shown) ~ .label {
+        color: $greys-4;
+      }
+
+      &:hover {
+        box-shadow: none;
+        border-color: $greys-3;
+
+        & ~ .label,
+        &:not(:placeholder-shown) ~ .label {
+          color: $greys-3;
+        }
+      }
+    }
   }
 }
 
@@ -28,4 +121,23 @@
 
 .multiline {
   resize: vertical;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: 4px;
+
+  .error {
+    flex-grow: 1;
+  }
+
+  &.error {
+    justify-content: space-between;
+  }
+}
+
+.counter {
+  justify-self: flex-end;
 }

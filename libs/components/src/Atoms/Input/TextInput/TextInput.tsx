@@ -1,15 +1,21 @@
 import { ChangeEvent, ElementType, useMemo } from 'react'
 import cx from 'classnames'
 
+import Counter from '../../Counter/Counter'
+import Typography from '../../Typography/Typography'
+
 import { TextInputProps, DefaultTextInputProps, MultilineTextInputProps } from './TextInput.types'
 
 import styles from './TextInput.module.scss'
 
 export default function TextInput({
   disabled,
-  negative,
   fullWidth,
   multiline,
+  placeholder,
+  error,
+  maxlength,
+  name,
   value,
   onChange,
   className = '',
@@ -27,27 +33,45 @@ export default function TextInput({
       const { rows = 3 } = rest as MultilineTextInputProps
       return { rows }
     }
-    const { inputType } = rest as DefaultTextInputProps
+    const { inputType = 'text' } = rest as DefaultTextInputProps
     return { type: inputType }
   }, [multiline, rest])
 
+  const isInputNegative = error || (maxlength && maxlength === value?.length)
   return (
-    <Element
-      disabled={disabled}
-      value={value}
-      onChange={handleChange}
-      className={cx(
-        styles.text,
-        {
-          [styles.negative]: negative,
-          [styles.fullwidth]: fullWidth,
-          [styles.multiline]: multiline,
-        },
-        className
+    <div className={cx(styles.wrapper, { [styles.fullwidth]: fullWidth })}>
+      <Element
+        disabled={disabled}
+        maxlength={maxlength}
+        placeholder={placeholder}
+        name={name}
+        value={value}
+        onChange={handleChange}
+        className={cx(
+          styles.input,
+          {
+            [styles.negative]: isInputNegative,
+            [styles.multiline]: multiline,
+          },
+          className
+        )}
+        style={style}
+        {...inputProps}
+      />
+      {placeholder && (
+        <label htmlFor={name} className={styles.label}>
+          {placeholder}
+        </label>
       )}
-      style={style}
-      {...inputProps}
-    />
+      <div className={cx(styles.footer, { [styles.error]: error })}>
+        {error && (
+          <Typography negative variant="caption" className={styles.error}>
+            {error}
+          </Typography>
+        )}
+        {maxlength && <Counter value={value?.length} maxlength={maxlength} className={styles.counter} />}
+      </div>
+    </div>
   )
 }
 

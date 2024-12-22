@@ -2,9 +2,11 @@ import { ComponentDefaultProps } from '@types'
 
 export type TextInputProps = {
   disabled?: boolean
-  negative?: boolean
   fullWidth?: boolean
   placeholder?: string
+  error?: string
+  maxlength?: number
+  name: string
   value?: string
   onChange: (newValue: string) => void
 } & (DefaultTextInputProps | MultilineTextInputProps) &
