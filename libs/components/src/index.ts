@@ -7,5 +7,6 @@ import Typography from './Atoms/Typography/Typography'
 
 // Molecules
 import PasswordInput from './Molecules/PasswordInput/PasswordInput'
+import SearchInput from './Molecules/SearchInput/SearchInput'
 
-export { Button, Counter, Icon, Input, Typography, PasswordInput }
+export { Button, Counter, Icon, Input, Typography, PasswordInput, SearchInput }
