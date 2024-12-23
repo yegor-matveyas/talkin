@@ -8,6 +8,6 @@ export interface IconButtonProps extends ComponentDefaultProps {
   disabled?: boolean
   name: IconName
   variant?: IconButtonVariant
-  size?: 'sm' | 'md'
+  size?: 'xs' | 'sm' | 'md'
   onClick?: (...rest: unknown[]) => void
 }

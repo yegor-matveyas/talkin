@@ -7,10 +7,12 @@ import CloseIcon from './CloseIcon'
 import LockIcon from './LockIcon'
 import MenuIcon from './MenuIcon'
 import SearchIcon from './SearchIcon'
+import VisibilityIcon from './VisibilityIcon'
+import VisibilityOffIcon from './VisibilityOffIcon'
 
 import styles from './Icon.module.scss'
 
-export type IconName = 'close' | 'lock' | 'menu' | 'search'
+export type IconName = 'close' | 'lock' | 'menu' | 'search' | 'visibility' | 'visibilityOff'
 
 interface IconProps extends ComponentDefaultProps {
   name: IconName
@@ -21,6 +23,8 @@ const icons: Record<IconName, FC<ComponentDefaultProps>> = {
   lock: LockIcon,
   menu: MenuIcon,
   search: SearchIcon,
+  visibility: VisibilityIcon,
+  visibilityOff: VisibilityOffIcon,
 }
 
 export default function Icon({ name, className, style }: IconProps) {
