@@ -1,6 +1,8 @@
 import type { ComponentDefaultProps } from '@types'
 import type { IconName } from '../../Icon/Icon'
 
+// TODO Recheck types
+
 export type TextInputProps = ComponentDefaultProps & {
   multiline?: boolean
   disabled?: boolean
@@ -8,6 +10,7 @@ export type TextInputProps = ComponentDefaultProps & {
   placeholder?: string
   error?: string
   maxLength?: number
+  minLength?: number
   name: string
   value: string
   onChange: (newValue: string) => void

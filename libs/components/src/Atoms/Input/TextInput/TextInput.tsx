@@ -17,6 +17,7 @@ export default function TextInput({
   placeholder,
   error,
   maxLength,
+  minLength,
   name,
   value,
   onChange,
@@ -54,7 +55,7 @@ export default function TextInput({
       result.onEndIconAction = () => onChange('')
     } else if ('endIcon' in rest) {
       result.endIcon = rest.endIcon
-      result.onEndIconAction = onEndIconAction
+      result.onEndIconAction = rest.onEndIconAction
     }
 
     return result
@@ -66,6 +67,7 @@ export default function TextInput({
       <Element
         disabled={disabled}
         maxLength={maxLength}
+        minLength={minLength}
         placeholder={placeholder}
         name={name}
         value={value}
