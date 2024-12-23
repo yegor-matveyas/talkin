@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
+import type { TextInputProps, DefaultTextInputProps, MultilineTextInputProps } from './TextInput.types'
 import TextInput from './TextInput'
-import { TextInputProps } from './TextInput.types'
 
-interface TextInputWithStateProps extends Omit<TextInputProps, 'value' | 'onChange'> {
-  defaultValue?: string
-}
+type TextInputWithStateProps = { defaultValue?: string } & Omit<TextInputProps, 'value' | 'onChange'> &
+  (DefaultTextInputProps | MultilineTextInputProps)
+
 const meta: Meta<typeof TextInput> = {
   component: TextInput,
   title: 'Atoms/Input/Text',
@@ -13,16 +13,19 @@ const meta: Meta<typeof TextInput> = {
     const [value, setValue] = useState<string>(defaultValue)
     return <TextInput value={value} onChange={setValue} {...rest} />
   },
+  parameters: { controls: { exclude: ['multiline', 'style', 'className', 'value', 'onChange'] } },
 }
 export default meta
 
-type Story = StoryObj<typeof TextInput>
+type Story = StoryObj<TextInputWithStateProps>
 
 export const Default: Story = {
   args: {
+    multiline: false,
     disabled: false,
     fullWidth: false,
-    maxlength: 20,
+    clearable: false,
+    maxLength: 20,
     placeholder: 'First Name',
     name: 'firstName',
   },
@@ -32,16 +35,31 @@ export const Error: Story = {
   args: {
     error: 'Wrong Message Format',
     ...Default.args,
+    name: 'error',
+    defaultValue: '01234567890123456789',
+  },
+}
+
+export const Icons: Story = {
+  args: {
+    ...Default.args,
+    startIcon: 'search',
+    maxLength: undefined,
+    placeholder: 'Last Name',
+    clearable: true,
+    name: 'lastName',
   },
 }
 
 export const Multiline: Story = {
   args: {
+    multiline: true,
     disabled: false,
     resizable: false,
     fullWidth: false,
     placeholder: 'Message',
     name: 'message',
-    multiline: true,
+    error: '',
+    maxLength: 1000,
   },
 }

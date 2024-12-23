@@ -1,19 +1,19 @@
-import { ComponentDefaultProps } from '@types'
+import type { ComponentDefaultProps } from '@types'
 
 import Typography from '../Typography/Typography'
 
 interface CounterProps extends ComponentDefaultProps {
   value?: number
-  maxlength: number
+  maxLength: number
 }
 
-export default function Counter({ value = 0, maxlength, className = '', style = {} }: CounterProps) {
-  const isWarning = value / maxlength > 0.8 && value < maxlength
-  const isNegative = value >= maxlength
+export default function Counter({ value = 0, maxLength, className = '', style = {} }: CounterProps) {
+  const isWarning = value / maxLength > 0.8 && value < maxLength
+  const isNegative = value >= maxLength
 
   return (
     <Typography warning={isWarning} negative={isNegative} variant="caption" className={className} style={style}>
-      {`${value} of ${maxlength}`}
+      {`${value} of ${maxLength}`}
     </Typography>
   )
 }

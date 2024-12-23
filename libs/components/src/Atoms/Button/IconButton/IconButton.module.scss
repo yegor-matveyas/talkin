@@ -23,138 +23,138 @@
   &:disabled {
     cursor: not-allowed;
   }
+}
 
-  &.contained {
-    color: $white;
-    background-color: $primary;
-    border-color: $primary;
+.contained {
+  color: $white;
+  background-color: $primary;
+  border-color: $primary;
+
+  &:hover {
+    background-color: $secondary;
+    border-color: $secondary;
+  }
+
+  &:active {
+    background-color: $ternary;
+    border-color: $ternary;
+  }
+
+  &.negative {
+    background-color: $negatives-0;
+    border-color: $negatives-0;
 
     &:hover {
-      background-color: $secondary;
-      border-color: $secondary;
+      background-color: $negatives-1;
+      border-color: $negatives-1;
     }
 
     &:active {
-      background-color: $ternary;
-      border-color: $ternary;
-    }
-
-    &.negative {
-      background-color: $negatives-0;
-      border-color: $negatives-0;
-
-      &:hover {
-        background-color: $negatives-1;
-        border-color: $negatives-1;
-      }
-
-      &:active {
-        background-color: $negatives-2;
-        border-color: $negatives-2;
-      }
-    }
-
-    &:disabled {
-      background-color: $greys-3;
-      border-color: $greys-3;
-
-      &:hover {
-        background-color: $greys-2;
-        border-color: $greys-2;
-      }
+      background-color: $negatives-2;
+      border-color: $negatives-2;
     }
   }
 
-  &.outlined {
-    color: $primary;
-    border-color: $primary;
+  &:disabled {
+    background-color: $greys-3;
+    border-color: $greys-3;
 
     &:hover {
-      color: $secondary;
-      border-color: $secondary;
+      background-color: $greys-2;
+      border-color: $greys-2;
+    }
+  }
+}
+
+.outlined {
+  color: $primary;
+  border-color: $primary;
+
+  &:hover {
+    color: $secondary;
+    border-color: $secondary;
+  }
+
+  &:active {
+    color: $white;
+    background-color: $ternary;
+    border-color: $ternary;
+  }
+
+  &.negative {
+    color: $negatives-0;
+    border-color: $negatives-0;
+
+    &:hover {
+      color: $negatives-1;
+      border-color: $negatives-1;
     }
 
     &:active {
       color: $white;
-      background-color: $ternary;
-      border-color: $ternary;
-    }
-
-    &.negative {
-      color: $negatives-0;
-      border-color: $negatives-0;
-
-      &:hover {
-        color: $negatives-1;
-        border-color: $negatives-1;
-      }
-
-      &:active {
-        color: $white;
-        background-color: $negatives-2;
-        border-color: $negatives-2;
-      }
-    }
-
-    &:disabled {
-      color: $greys-3;
-      border-color: $greys-3;
-
-      &:hover {
-        color: $greys-2;
-        border-color: $greys-2;
-      }
-
-      &:active {
-        background-color: transparent;
-      }
+      background-color: $negatives-2;
+      border-color: $negatives-2;
     }
   }
 
-  &.pure {
-    color: $primary;
+  &:disabled {
+    color: $greys-3;
+    border-color: $greys-3;
+
+    &:hover {
+      color: $greys-2;
+      border-color: $greys-2;
+    }
+
+    &:active {
+      background-color: transparent;
+    }
+  }
+}
+
+.pure {
+  color: $primary;
+
+  &:hover {
+    background-color: $greys-0;
+    border-color: $greys-0;
+    color: $secondary;
+  }
+
+  &:active {
+    color: $white;
+    background-color: $ternary;
+    border-color: $ternary;
+  }
+
+  &.negative {
+    color: $negatives-0;
 
     &:hover {
       background-color: $greys-0;
       border-color: $greys-0;
-      color: $secondary;
+      color: $negatives-1;
     }
 
     &:active {
       color: $white;
-      background-color: $ternary;
-      border-color: $ternary;
+      background-color: $negatives-2;
+      border-color: $negatives-2;
+    }
+  }
+
+  &:disabled {
+    color: $greys-3;
+
+    &:hover {
+      background-color: $greys-0;
+      border-color: $greys-0;
+      color: $greys-2;
     }
 
-    &.negative {
-      color: $negatives-0;
-
-      &:hover {
-        background-color: $greys-0;
-        border-color: $greys-0;
-        color: $negatives-1;
-      }
-
-      &:active {
-        color: $white;
-        background-color: $negatives-2;
-        border-color: $negatives-2;
-      }
-    }
-
-    &:disabled {
-      color: $greys-3;
-
-      &:hover {
-        background-color: $greys-0;
-        border-color: $greys-0;
-        color: $greys-2;
-      }
-
-      &:active {
-        background-color: $greys-0;
-        border-color: $greys-0;
-      }
+    &:active {
+      background-color: $greys-0;
+      border-color: $greys-0;
     }
   }
 }

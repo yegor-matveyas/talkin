@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import cx from 'classnames'
-import { ComponentDefaultProps } from '@types'
+
+import type { ComponentDefaultProps } from '@types'
 
 import CloseIcon from './CloseIcon'
 import LockIcon from './LockIcon'

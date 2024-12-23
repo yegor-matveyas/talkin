@@ -1,24 +1,29 @@
-import { ComponentDefaultProps } from '@types'
+import type { ComponentDefaultProps } from '@types'
+import type { IconName } from '../../Icon/Icon'
 
-export type TextInputProps = {
+export type TextInputProps = ComponentDefaultProps & {
+  multiline?: boolean
   disabled?: boolean
   fullWidth?: boolean
   placeholder?: string
   error?: string
-  maxlength?: number
+  maxLength?: number
   name: string
-  value?: string
+  value: string
   onChange: (newValue: string) => void
-} & (DefaultTextInputProps | MultilineTextInputProps) &
-  ComponentDefaultProps
+} & (DefaultTextInputProps | MultilineTextInputProps)
 
 export type DefaultTextInputProps = {
-  multiline?: false | undefined
+  clearable?: boolean
   inputType?: 'text' | 'password' | 'email'
+  startIcon?: IconName
+  endIcon?: IconName
+  onEndIconAction?: () => void
 }
 
 export type MultilineTextInputProps = {
-  multiline: true
   resizable?: boolean
   rows?: number
 }
+
+export type IconsProps = { startIcon?: IconName; endIcon?: IconName; onEndIconAction?: () => void }

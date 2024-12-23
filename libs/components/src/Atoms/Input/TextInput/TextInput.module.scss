@@ -5,6 +5,7 @@
 
   display: inline-flex;
   flex-direction: column;
+  font-size: $font-size-text;
 
   .label {
     pointer-events: none;
@@ -14,6 +15,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: inherit;
 
     position: absolute;
 
@@ -112,11 +114,33 @@
         }
       }
     }
+
+    &.endIconSpace {
+      padding-right: 36px;
+    }
+
+    &.startIconSpace {
+      padding-left: 36px;
+
+      & ~ .label {
+        left: 38px;
+      }
+    }
+
+    &.startIconSpace,
+    &.endIconSpace {
+      width: calc(100% - 54px);
+    }
+
+    &.startIconSpace.endIconSpace {
+      width: calc(100% - 76px);
+    }
   }
 
   .multiline {
     resize: none;
     height: unset;
+    min-height: 24px;
 
     &.resizable {
       resize: vertical;
@@ -140,6 +164,43 @@
 
   .counter {
     justify-self: flex-end;
+  }
+
+  .startIconWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 11px;
+    left: 8px;
+    height: 22px;
+    width: 22px;
+
+    .startIcon {
+      height: 14px;
+      width: 14px;
+
+      color: $greys-4;
+    }
+  }
+
+  .endIcon {
+    position: absolute;
+    color: $greys-4;
+    top: 11px;
+    right: 8px;
+
+    &:hover {
+      background-color: transparent;
+      color: $greys-3;
+    }
+
+    &:active {
+      background-color: $greys-2;
+      border-color: $greys-2;
+      color: $white;
+    }
   }
 }
 
