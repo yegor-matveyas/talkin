@@ -1,0 +1,51 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Chat {
+  chatId: UUID!
+  chatType: ChatType!
+  id: ID!
+  lastUnreadMessage: Message
+  messages: [Message]!
+  pinnedMessage: Message
+}
+
+enum ChatType {
+  DEFAULT
+  GROUP
+}
+
+type Message {
+  id: ID!
+  messageId: UUID!
+  nodes: [MessageNode!]!
+}
+
+type MessageNode {
+  id: ID!
+  link: String
+  message: Message!
+  nodeType: MessageNodeType!
+  style: MessageNodeStyle
+  text: String
+}
+
+enum MessageNodeStyle {
+  BOLD
+  ITALIC
+}
+
+enum MessageNodeType {
+  LINK
+  MENTION
+  TEXT
+}
+
+type Query {
+  chat(id: UUID!): Chat!
+  chats: [Chat!]!
+}
+
+"""A simple UUID parser"""
+scalar UUID
