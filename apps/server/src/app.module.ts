@@ -5,6 +5,8 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { ConfigModule } from '@nestjs/config'
 
+import { MessagesModule } from './modules/messages/messages.module'
+
 import { UUIDScalar } from './graphql/scalars'
 
 @Module({
@@ -16,6 +18,7 @@ import { UUIDScalar } from './graphql/scalars'
       autoSchemaFile: join(process.cwd(), process.env.GRAPHQL_SCHEMA_PATH),
       sortSchema: true,
     }),
+    MessagesModule,
   ],
 })
 export class AppModule {}
