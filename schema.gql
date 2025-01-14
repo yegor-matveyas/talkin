@@ -43,7 +43,7 @@ enum MessageNodeType {
 }
 
 type Query {
-  chat(id: UUID!): Chat!
+  chat(id: UUID!): Chat
   chats: [Chat!]!
 }
 

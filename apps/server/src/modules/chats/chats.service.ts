@@ -1,10 +1,23 @@
 import { Injectable } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
+
+import { Repository } from 'typeorm'
+
 import { MessageNodeType, ChatType } from '@types'
+
+import { Chat } from './chats.entity'
 
 @Injectable()
 export class ChatsService {
-  findChats() {
-    return chats
+  constructor(
+    @InjectRepository(Chat)
+    private chatsRepository: Repository<Chat>
+  ) {}
+
+  async findChats() {
+    const data = await this.chatsRepository.find()
+    console.log('data ', data)
+    return []
   }
 
   findChatById(uuid: string) {

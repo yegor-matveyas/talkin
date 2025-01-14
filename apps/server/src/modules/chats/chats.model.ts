@@ -1,7 +1,7 @@
 import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql'
 import { ChatType } from '@types'
 
-import { Message } from '../messages/messages.models'
+import { Message } from '../messages/messages.model'
 import { UUIDScalar } from '../../graphql/scalars'
 
 @ObjectType()

@@ -1,6 +1,6 @@
 import { Args, Query, Resolver } from '@nestjs/graphql'
 import { ChatsService } from './chats.service'
-import { Chat } from './chats.models'
+import { Chat } from './chats.model'
 
 import { UUIDScalar } from '../../graphql/scalars'
 
@@ -8,7 +8,7 @@ import { UUIDScalar } from '../../graphql/scalars'
 export class ChatsResolver {
   constructor(private readonly chatsService: ChatsService) {}
 
-  @Query(() => Chat)
+  @Query(() => Chat, { nullable: true })
   async chat(@Args('id', { type: () => UUIDScalar }) id: string) {
     return this.chatsService.findChatById(id)
   }
