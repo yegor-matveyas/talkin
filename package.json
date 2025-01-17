@@ -2,7 +2,9 @@
   "name": "@talkin/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "typeorm:migration:run": "nx run server:typeorm-migration-run"
+  },
   "private": true,
   "dependencies": {
     "@apollo/server": "^4.11.3",
