@@ -9,24 +9,15 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { ChatsModule } from './modules/chats/chats.module'
 import { MessagesModule } from './modules/messages/messages.module'
 
-import { Chat as ChatEntity } from './modules/chats/chats.entity'
-import { Message as MessageEntity } from './modules/messages/messages.entity'
-
 import { UUIDScalar } from './graphql/scalars'
+import { UsersModule } from './modules/users/users.module'
+
+import { dataSourceOptions } from './ormconfig'
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT, 10),
-      username: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      entities: [ChatEntity, MessageEntity],
-      synchronize: process.env.DB_SYNCHRONIZE === 'true',
-    }),
+    TypeOrmModule.forRoot(dataSourceOptions),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       resolvers: { UUID: UUIDScalar },
@@ -35,6 +26,7 @@ import { UUIDScalar } from './graphql/scalars'
     }),
     ChatsModule,
     MessagesModule,
+    UsersModule,
   ],
 })
 export class AppModule {}
