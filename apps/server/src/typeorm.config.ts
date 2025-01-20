@@ -1,8 +1,5 @@
 import { DataSourceOptions, DataSource } from 'typeorm'
 
-console.log('__dirname ', __dirname)
-console.log('process.cwd ', process.cwd())
-
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
   host: process.env.DB_HOST,
