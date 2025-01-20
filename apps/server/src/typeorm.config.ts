@@ -1,5 +1,7 @@
 import { DataSourceOptions, DataSource } from 'typeorm'
 
+import { User } from './modules/users/users.entity'
+
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
   host: process.env.DB_HOST,
@@ -7,9 +9,8 @@ export const dataSourceOptions: DataSourceOptions = {
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: ['modules/**/*.entity.ts'],
+  entities: [User],
   synchronize: true,
-  migrations: ['migrations/*.ts'],
   migrationsRun: true,
 }
 
