@@ -6,13 +6,14 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { ConfigModule } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
-import { ChatsModule } from './modules/chats/chats.module'
+import { AuthModule } from './modules/auth/auth.module'
+import { UsersModule } from './modules/users/users.module'
 import { MessagesModule } from './modules/messages/messages.module'
+import { ChatsModule } from './modules/chats/chats.module'
 
 import { UUIDScalar } from './graphql/scalars'
-import { UsersModule } from './modules/users/users.module'
 
-import { dataSourceOptions } from './ormconfig'
+import { dataSourceOptions } from './typeorm.config'
 
 @Module({
   imports: [
@@ -24,9 +25,10 @@ import { dataSourceOptions } from './ormconfig'
       autoSchemaFile: join(process.cwd(), process.env.GRAPHQL_SCHEMA_PATH),
       sortSchema: true,
     }),
-    ChatsModule,
-    MessagesModule,
+    AuthModule,
     UsersModule,
+    MessagesModule,
+    ChatsModule,
   ],
 })
 export class AppModule {}

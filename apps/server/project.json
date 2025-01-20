@@ -38,7 +38,30 @@
     "migration:run": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "ts-node --project tsconfig.app.json ../../node_modules/typeorm/cli migration:run -d src/ormconfig.ts",
+        "command": "ts-node --project tsconfig.app.json ../../node_modules/typeorm/cli migration:run -d src/typeorm.config.ts",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "migration:generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ts-node --project tsconfig.app.json ../../node_modules/typeorm/cli migration:generate src/migrations/{args.name} -d src/typeorm.config.ts",
+        "cwd": "{projectRoot}",
+        "name": "Init"
+      }
+    },
+    "migration:create": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ts-node --project tsconfig.app.json ../../node_modules/typeorm/cli migration:create src/migrations/{args.name}",
+        "cwd": "{projectRoot}",
+        "name": "Empty"
+      }
+    },
+    "migration:revert": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ts-node --project tsconfig.app.json ../../node_modules/typeorm/cli migration:revert -d src/typeorm.config.ts",
         "cwd": "{projectRoot}"
       }
     }
