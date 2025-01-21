@@ -2,6 +2,15 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input AuthInput {
+  password: String!
+  username: String!
+}
+
+type AuthResponse {
+  access_token: String!
+}
+
 input CreateUserInput {
   email: String!
   password: String!
@@ -10,10 +19,13 @@ input CreateUserInput {
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
+  login(authInput: AuthInput!): AuthResponse!
 }
 
 type Query {
-  users: [User!]
+  me: User!
+  user(where: UserWhereUniqueInput!): User!
+  users(where: UsersWhereInput): [User!]
 }
 
 """A simple UUID parser"""
@@ -24,4 +36,12 @@ type User {
   id: Int!
   userId: UUID!
   username: String!
+}
+
+input UserWhereUniqueInput {
+  userId: UUID!
+}
+
+input UsersWhereInput {
+  username: String
 }

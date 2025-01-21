@@ -41,3 +41,15 @@ export class CreateUserInput {
   @Field()
   password: string
 }
+
+@InputType()
+export class UserWhereUniqueInput {
+  @Field(() => UUIDScalar)
+  userId: string
+}
+
+@InputType()
+export class UsersWhereInput {
+  @Field({ nullable: true })
+  username?: string
+}
