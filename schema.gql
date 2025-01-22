@@ -27,6 +27,7 @@ scalar DateTime
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   login(authInput: AuthInput!): AuthCredentials!
+  logout: Boolean!
   refreshTokens: AuthCredentials!
 }
 

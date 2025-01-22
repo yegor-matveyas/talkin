@@ -32,21 +32,27 @@ export class AuthService {
     return await this.generateTokens(user)
   }
 
+  async logout(token: string): Promise<boolean> {
+    await this.deleteToken(token)
+    return true
+  }
+
   async refreshTokens(currentRefreshToken: string): Promise<TAuthCredentials> {
-    const payload = await this.jwtService.verifyAsync<TCurrentUser>(currentRefreshToken)
-
-    const user = await this.userRepository.findOneBy({ userId: payload.userId })
-
-    await this.credentialsRepository.delete({ user, refreshToken: currentRefreshToken })
+    const user = await this.deleteToken(currentRefreshToken)
 
     const { accessToken, refreshToken, expiresAt } = await this.generateTokens(user)
     return { accessToken, refreshToken, expiresAt }
   }
 
-  async generateTokens(user: User): Promise<TAuthCredentials> {
+  private async generateTokens(user: User): Promise<TAuthCredentials> {
     const payload = { userId: user.userId, username: user.username }
+
+    const existingCreds = await this.credentialsRepository.findOneBy({ user })
+    const refreshToken = existingCreds
+      ? existingCreds.refreshToken
+      : await this.jwtService.signAsync(payload, { expiresIn: '7d' })
+
     const accessToken = await this.jwtService.signAsync(payload, { expiresIn: '15m' })
-    const refreshToken = await this.jwtService.signAsync(payload, { expiresIn: '7d' })
 
     const creds = new AuthCredentials()
     creds.refreshToken = refreshToken
@@ -58,5 +64,12 @@ export class AuthService {
       refreshToken,
       expiresAt: dayjs().add(15, 'm').toDate(),
     }
+  }
+
+  private async deleteToken(token: string): Promise<User> {
+    const payload = await this.jwtService.verifyAsync<TCurrentUser>(token)
+    const user = await this.userRepository.findOneBy({ userId: payload.userId })
+    await this.credentialsRepository.delete({ user, refreshToken: token })
+    return user
   }
 }

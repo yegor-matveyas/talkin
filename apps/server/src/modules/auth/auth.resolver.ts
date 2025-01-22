@@ -23,4 +23,10 @@ export class AuthResolver {
     const token = cookies.refreshToken
     return this.authService.refreshTokens(token)
   }
+
+  @Mutation(() => Boolean)
+  async logout(@Cookies() cookies: { refreshToken: string }) {
+    const token = cookies.refreshToken
+    return this.authService.logout(token)
+  }
 }
