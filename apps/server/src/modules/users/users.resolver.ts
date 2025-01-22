@@ -3,7 +3,7 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 
 import { AuthGuard, CurrentUser } from '../auth/auth.guard'
 
-import { TCurrentUser } from '../auth/auth.types'
+import { TCurrentUser } from '../auth/auth.entity'
 
 import { UsersService } from './users.service'
 import { User, CreateUserInput, UserWhereUniqueInput, UsersWhereInput } from './users.entity'

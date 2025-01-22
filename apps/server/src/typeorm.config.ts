@@ -1,5 +1,6 @@
 import { DataSourceOptions, DataSource } from 'typeorm'
 
+import { AuthCredentials } from './modules/auth/auth.entity'
 import { User } from './modules/users/users.entity'
 
 export const dataSourceOptions: DataSourceOptions = {
@@ -9,7 +10,7 @@ export const dataSourceOptions: DataSourceOptions = {
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [User],
+  entities: [AuthCredentials, User],
   synchronize: true,
   migrationsRun: true,
 }

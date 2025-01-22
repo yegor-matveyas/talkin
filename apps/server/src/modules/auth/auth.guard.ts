@@ -14,3 +14,9 @@ export const CurrentUser = createParamDecorator((_data: unknown, context: Execut
   const ctx = GqlExecutionContext.create(context)
   return ctx.getContext().req.user
 })
+
+export const Cookies = createParamDecorator((data: string, context: ExecutionContext) => {
+  const ctx = GqlExecutionContext.create(context)
+  const request = ctx.getContext().req
+  return data ? request.cookies?.[data] : request.cookies
+})

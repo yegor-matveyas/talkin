@@ -1,9 +1,10 @@
 import { InputType, Int, Field, ObjectType } from '@nestjs/graphql'
 
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
 import { Length, IsEmail } from 'class-validator'
 
 import { UUIDScalar } from '../../graphql/scalars'
+import { AuthCredentials } from '../auth/auth.entity'
 
 @ObjectType()
 @Entity()
@@ -28,6 +29,9 @@ export class User {
 
   @Column()
   password: string
+
+  @OneToMany(() => AuthCredentials, (authCredentials) => authCredentials.user)
+  credentials: AuthCredentials[]
 }
 
 @InputType()
