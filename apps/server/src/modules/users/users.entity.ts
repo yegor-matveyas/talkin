@@ -4,7 +4,9 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
 import { Length, IsEmail } from 'class-validator'
 
 import { UUIDScalar } from '../../graphql/scalars'
+
 import { AuthCredentials } from '../auth/auth.entity'
+import { MessageNodeMention } from '../messages/nodes/nodes.entity'
 
 @ObjectType()
 @Entity()
@@ -32,6 +34,9 @@ export class User {
 
   @OneToMany(() => AuthCredentials, (authCredentials) => authCredentials.user)
   credentials: AuthCredentials[]
+
+  @OneToMany(() => MessageNodeMention, (messageMention) => messageMention.user)
+  messageMentions: MessageNodeMention[]
 }
 
 @InputType()

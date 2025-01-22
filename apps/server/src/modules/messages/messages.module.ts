@@ -5,9 +5,12 @@ import { MessagesService } from './messages.service'
 import { MessagesResolver } from './messages.resolver'
 
 import { Message } from './messages.entity'
+import { MessageNode, MessageNodeLink, MessageNodeMention, MessageNodeText } from './nodes/nodes.entity'
+import { NodesResolver } from './nodes/nodes.resolver'
+
 @Module({
-  providers: [MessagesResolver, MessagesService],
-  imports: [TypeOrmModule.forFeature([Message])],
+  imports: [TypeOrmModule.forFeature([Message, MessageNode, MessageNodeLink, MessageNodeMention, MessageNodeText])],
+  providers: [MessagesResolver, NodesResolver, MessagesService],
   exports: [TypeOrmModule],
 })
 export class MessagesModule {}

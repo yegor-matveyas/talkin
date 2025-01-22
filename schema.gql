@@ -24,6 +24,33 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Message {
+  id: Int!
+  messageId: UUID!
+  nodes: [MessageNode!]!
+}
+
+type MessageNode {
+  id: Int!
+  link: String
+  mention: User
+  message: Message!
+  nodeType: MessageNodeType!
+  style: MessageNodeStyle
+  text: String
+}
+
+enum MessageNodeStyle {
+  BOLD
+  ITALIC
+}
+
+enum MessageNodeType {
+  LINK
+  MENTION
+  TEXT
+}
+
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   login(authInput: AuthInput!): AuthCredentials!

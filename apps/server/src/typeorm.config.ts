@@ -1,6 +1,13 @@
 import { DataSourceOptions, DataSource } from 'typeorm'
 
 import { AuthCredentials } from './modules/auth/auth.entity'
+import { Message } from './modules/messages/messages.entity'
+import {
+  MessageNode,
+  MessageNodeLink,
+  MessageNodeMention,
+  MessageNodeText,
+} from './modules/messages/nodes/nodes.entity'
 import { User } from './modules/users/users.entity'
 
 export const dataSourceOptions: DataSourceOptions = {
@@ -10,7 +17,7 @@ export const dataSourceOptions: DataSourceOptions = {
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [AuthCredentials, User],
+  entities: [AuthCredentials, Message, MessageNode, MessageNodeLink, MessageNodeMention, MessageNodeText, User],
   synchronize: true,
   migrationsRun: true,
 }
