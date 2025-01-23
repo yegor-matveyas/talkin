@@ -13,6 +13,21 @@ input AuthInput {
   username: String!
 }
 
+type Chat {
+  chatId: UUID!
+  chatType: ChatType!
+  id: Int!
+  lastUnreadMessage: Message
+  members: [User!]!
+  messages: [Message]!
+  pinnedMessage: Message
+}
+
+enum ChatType {
+  DEFAULT
+  GROUP
+}
+
 input CreateUserInput {
   email: String!
   password: String!
@@ -25,6 +40,7 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Message {
+  chat: Chat!
   id: Int!
   messageId: UUID!
   nodes: [MessageNode!]!

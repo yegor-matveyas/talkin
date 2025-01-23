@@ -4,6 +4,7 @@ import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'ty
 
 import { UUIDScalar } from '../../graphql/scalars'
 
+import { Chat } from '../chats/chats.entity'
 import { User } from '../users/users.entity'
 import { MessageNode, MessageNodeInput } from './nodes/nodes.entity'
 
@@ -18,17 +19,21 @@ export class Message {
   @Column({ generated: 'uuid' })
   messageId: string
 
-  @Field(() => [MessageNode])
-  @OneToMany(() => MessageNode, (node) => node.message)
-  nodes: MessageNode[]
+  @Field()
+  @Column({ type: 'timestamptz' })
+  sentAt: Date
+
+  @Field(() => Chat)
+  @ManyToOne(() => Chat, (chat) => chat.messages)
+  chat: Chat
 
   @Field(() => User)
   @ManyToOne(() => User, (user) => user.messages)
   sender: User
 
-  @Field()
-  @Column({ type: 'timestamptz' })
-  sentAt: Date
+  @Field(() => [MessageNode])
+  @OneToMany(() => MessageNode, (node) => node.message)
+  nodes: MessageNode[]
 }
 
 @InputType()
