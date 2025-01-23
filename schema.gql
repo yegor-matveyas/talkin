@@ -28,6 +28,8 @@ type Message {
   id: Int!
   messageId: UUID!
   nodes: [MessageNode!]!
+  sender: User!
+  sentAt: DateTime!
 }
 
 type MessageNode {
@@ -35,6 +37,14 @@ type MessageNode {
   link: String
   mention: User
   message: Message!
+  nodeType: MessageNodeType!
+  style: MessageNodeStyle
+  text: String
+}
+
+input MessageNodeInput {
+  link: String
+  mentionId: UUID
   nodeType: MessageNodeType!
   style: MessageNodeStyle
   text: String
@@ -56,12 +66,18 @@ type Mutation {
   login(authInput: AuthInput!): AuthCredentials!
   logout: Boolean!
   refreshTokens: AuthCredentials!
+  sendMessage(sendMessageInput: SendMessageInput!): Message!
 }
 
 type Query {
   me: User!
   user(where: UserWhereUniqueInput!): User!
   users(where: UsersWhereInput): [User!]
+}
+
+input SendMessageInput {
+  nodes: [MessageNodeInput!]!
+  senderId: UUID!
 }
 
 """A simple UUID parser"""

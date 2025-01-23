@@ -6,6 +6,7 @@ import { Length, IsEmail } from 'class-validator'
 import { UUIDScalar } from '../../graphql/scalars'
 
 import { AuthCredentials } from '../auth/auth.entity'
+import { Message } from '../messages/messages.entity'
 import { MessageNodeMention } from '../messages/nodes/nodes.entity'
 
 @ObjectType()
@@ -37,6 +38,9 @@ export class User {
 
   @OneToMany(() => MessageNodeMention, (messageMention) => messageMention.user)
   messageMentions: MessageNodeMention[]
+
+  @OneToMany(() => Message, (message) => message.sender)
+  messages: Message[]
 }
 
 @InputType()

@@ -3,30 +3,35 @@ import { InjectRepository } from '@nestjs/typeorm'
 
 import { Repository } from 'typeorm'
 
-import { User } from '../users/users.entity'
+import { UsersService } from '../users/users.service'
 
-import { MessageNode, MessageNodeLink, MessageNodeMention, MessageNodeText } from './nodes/nodes.entity'
+import { NodesService } from './nodes/nodes.service'
+import { MessageNode } from './nodes/nodes.entity'
+import { Message, SendMessageInput } from './messages.entity'
 
 @Injectable()
 export class MessagesService {
   constructor(
-    @InjectRepository(MessageNodeLink) private readonly linkRepository: Repository<MessageNodeLink>,
-    @InjectRepository(MessageNodeText) private readonly textRepository: Repository<MessageNodeText>,
-    @InjectRepository(MessageNodeMention) private readonly mentionRepository: Repository<MessageNodeMention>
+    @InjectRepository(Message) private readonly messageRepository: Repository<Message>,
+    private nodesService: NodesService,
+    private usersService: UsersService
   ) {}
 
-  async getLink(node: MessageNode): Promise<string> {
-    const linkNode = await this.linkRepository.findOneBy({ node })
-    return linkNode.link
+  async createMessage(data: SendMessageInput): Promise<Message> {
+    const messageData = new Message()
+
+    messageData.sentAt = new Date()
+    messageData.sender = await this.usersService.getOneByUserId(data.senderId)
+
+    const message = await this.messageRepository.save(messageData)
+
+    data.nodes.forEach(async (n) => {
+      await this.nodesService.createNode(n, message)
+    })
+    return message
   }
 
-  async getMention(node: MessageNode): Promise<User> {
-    const mentionNode = await this.mentionRepository.findOneBy({ node })
-    return mentionNode.user
-  }
-
-  async getText(node: MessageNode): Promise<string> {
-    const textNode = await this.textRepository.findOneBy({ node })
-    return textNode.text
+  async getNodes(message: Message): Promise<MessageNode[]> {
+    return await this.nodesService.getMessageNodes(message)
   }
 }
