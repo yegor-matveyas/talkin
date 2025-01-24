@@ -54,7 +54,7 @@ export class NodesService {
         await this.linkRepository.save(nodeLink)
         break
       }
-      case MessageNodeType.TEXT: {
+      case (MessageNodeType.EVENT, MessageNodeType.TEXT): {
         const nodeText = new MessageNodeText()
         nodeText.text = data.text
         nodeText.node = node

@@ -3,7 +3,15 @@ export enum ChatType {
   GROUP,
 }
 
+export enum MessageType {
+  ATTACHMENT,
+  EVENT,
+  TEXT,
+}
+
 export enum MessageNodeType {
+  ATTACHMENT,
+  EVENT,
   LINK,
   MENTION,
   TEXT,

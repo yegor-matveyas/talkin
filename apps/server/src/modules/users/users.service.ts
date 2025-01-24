@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 
 import { hash } from 'bcryptjs'
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
 
 import { User, CreateUserInput, UsersWhereInput } from './users.entity'
 
@@ -21,6 +21,10 @@ export class UsersService {
 
   async getOneByUserId(userId: string): Promise<User | undefined> {
     return this.usersRepository.findOne({ where: { userId } })
+  }
+
+  async getAllByUserIds(userIds: string[]): Promise<User[] | undefined> {
+    return this.usersRepository.findBy({ userId: In(userIds) })
   }
 
   async createUser(createUserInput: CreateUserInput): Promise<User> {

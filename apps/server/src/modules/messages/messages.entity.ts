@@ -1,6 +1,8 @@
-import { Field, InputType, Int, ObjectType } from '@nestjs/graphql'
+import { Field, InputType, Int, ObjectType, registerEnumType } from '@nestjs/graphql'
 
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm'
+
+import { MessageType } from '@types'
 
 import { UUIDScalar } from '../../graphql/scalars'
 
@@ -23,6 +25,9 @@ export class Message {
   @Column({ type: 'timestamptz' })
   sentAt: Date
 
+  @Field(() => MessageType)
+  messageType: MessageType
+
   @Field(() => Chat)
   @ManyToOne(() => Chat, (chat) => chat.messages)
   chat: Chat
@@ -39,8 +44,13 @@ export class Message {
 @InputType()
 export class SendMessageInput {
   @Field(() => UUIDScalar)
+  chatId: string
+
+  @Field(() => UUIDScalar)
   senderId: string
 
   @Field(() => [MessageNodeInput])
   nodes: MessageNodeInput[]
 }
+
+registerEnumType(MessageType, { name: 'MessageType' })

@@ -27,7 +27,7 @@ export class NodesResolver {
 
   @ResolveField()
   async text(@Parent() node: MessageNode): Promise<string | null> {
-    if (node.nodeType === MessageNodeType.TEXT) {
+    if ([MessageNodeType.EVENT, MessageNodeType.TEXT].includes(node.nodeType)) {
       return this.nodesService.getText(node)
     } else return null
   }

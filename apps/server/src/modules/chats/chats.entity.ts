@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { Field, InputType, Int, ObjectType, registerEnumType } from '@nestjs/graphql'
 
 import { Column, Entity, JoinTable, JoinColumn, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 
@@ -33,6 +33,11 @@ export class Chat {
   @JoinTable({ name: 'chat_member' })
   members: User[]
 
+  @Field(() => User, { nullable: true })
+  @OneToOne(() => User, { nullable: true })
+  @JoinColumn()
+  founder?: User
+
   @Field(() => [Message], { nullable: 'items' })
   @OneToMany(() => Message, (message) => message.chat)
   messages: Message[]
@@ -46,6 +51,15 @@ export class Chat {
   @OneToOne(() => Message, { nullable: true })
   @JoinColumn()
   lastUnreadMessage?: Message
+}
+
+@InputType()
+export class CreateChatInput {
+  @Field(() => ChatType)
+  chatType: ChatType
+
+  @Field(() => [UUIDScalar])
+  memberIds: string[]
 }
 
 registerEnumType(ChatType, { name: 'ChatType' })

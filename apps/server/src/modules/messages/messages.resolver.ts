@@ -1,4 +1,9 @@
 import { Args, Mutation, Resolver, ResolveField, Parent } from '@nestjs/graphql'
+
+import { MessageType } from '@types'
+
+import { MessageNode } from './nodes/nodes.entity'
+
 import { MessagesService } from './messages.service'
 import { Message, SendMessageInput } from './messages.entity'
 
@@ -12,7 +17,12 @@ export class MessagesResolver {
   }
 
   @ResolveField()
-  async nodes(@Parent() message: Message) {
+  async nodes(@Parent() message: Message): Promise<MessageNode[]> {
     return await this.messagesService.getNodes(message)
+  }
+
+  @ResolveField()
+  async messageType(@Parent() message: Message): Promise<MessageType> {
+    return await this.messagesService.getMessageType(message)
   }
 }
