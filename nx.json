@@ -58,6 +58,12 @@
         "serveTargetName": "serve",
         "previewTargetName": "preview"
       }
+    },
+    {
+      "plugin": "@nx/playwright/plugin",
+      "options": {
+        "targetName": "e2e"
+      }
     }
   ],
   "generators": {
@@ -76,6 +82,11 @@
         "linter": "eslint",
         "unitTestRunner": "none"
       }
+    }
+  },
+  "targetDefaults": {
+    "e2e-ci--**/*": {
+      "dependsOn": ["^build"]
     }
   }
 }
