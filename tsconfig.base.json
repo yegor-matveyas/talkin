@@ -18,6 +18,7 @@
       "@components": ["libs/components/src/index.ts"],
       "@hooks": ["libs/hooks/src/index.ts"],
       "@styles": ["libs/styles/src/index.ts"],
+      "@utils": ["libs/utils/src/index.ts"],
       "@types": ["libs/types/src/index.ts"]
     }
   },
