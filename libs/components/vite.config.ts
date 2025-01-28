@@ -25,6 +25,11 @@ export default defineConfig({
   // },
   // Configuration for building your library.
   // See: https://vitejs.dev/guide/build.html#library-mode
+  resolve: {
+    alias: {
+      'base/variables': path.resolve(__dirname, '../styles/src/base/_variables.scss'),
+    },
+  },
   build: {
     outDir: '../../dist/libs/components',
     emptyOutDir: true,
