@@ -11,31 +11,31 @@ export default class AuthUtils {
     AuthUtils.instance = this
   }
 
-  private setToken(tokenName: string, value: string) {
+  private static setToken(tokenName: string, value: string) {
     localStorage.setItem(tokenName, value)
   }
 
-  setAccessToken(value: string) {
+  static setAccessToken(value: string) {
     this.setToken(AuthUtils.ACCESS_TOKEN, value)
   }
 
-  setRefreshToken(value: string) {
+  static setRefreshToken(value: string) {
     this.setToken(AuthUtils.REFRESH_TOKEN, value)
   }
 
-  private getToken(tokenName: string) {
+  private static getToken(tokenName: string) {
     return localStorage.getItem(tokenName)
   }
 
-  getAccessToken() {
+  static getAccessToken() {
     return this.getToken(AuthUtils.ACCESS_TOKEN)
   }
 
-  getRefreshToken() {
+  static getRefreshToken() {
     return this.getToken(AuthUtils.REFRESH_TOKEN)
   }
 
-  isAuthenticated() {
+  static isAuthenticated() {
     return Boolean(this.getAccessToken())
   }
 }
