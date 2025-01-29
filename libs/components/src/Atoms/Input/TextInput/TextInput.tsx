@@ -1,4 +1,4 @@
-import { ChangeEvent, ElementType, useMemo } from 'react'
+import { ElementType, useMemo } from 'react'
 import cx from 'classnames'
 
 import Button from '../../Button/Button'
@@ -6,7 +6,7 @@ import Counter from '../../Counter/Counter'
 import Icon from '../../Icon/Icon'
 import Typography from '../../Typography/Typography'
 
-import type { TextInputProps, DefaultTextInputProps, MultilineTextInputProps, IconsProps } from './TextInput.types'
+import type { TextInputProps, DefaultTextInputProps, MultilineTextInputProps, InputIconsArgs } from './TextInput.types'
 
 import styles from './TextInput.module.scss'
 
@@ -27,10 +27,6 @@ export default function TextInput({
 }: TextInputProps) {
   const Element = getTextInputElement(multiline)
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-    onChange(e.target.value)
-  }
-
   const inputProps = useMemo(() => {
     if (multiline) {
       const { rows = 3 } = rest as MultilineTextInputProps
@@ -44,22 +40,24 @@ export default function TextInput({
     startIcon = undefined,
     endIcon = undefined,
     onEndIconAction = undefined,
-  } = useMemo<IconsProps>(() => {
-    const result: IconsProps = {}
+  } = useMemo<InputIconsArgs>(() => {
+    const result: InputIconsArgs = {}
     if (multiline) return result
 
     if ('startIcon' in rest) result.startIcon = rest.startIcon
 
-    if ('clearable' in rest && !!rest.clearable) {
+    if ('onClear' in rest) {
       result.endIcon = 'close'
-      result.onEndIconAction = () => onChange('')
+      result.onEndIconAction = rest.onClear
     } else if ('endIcon' in rest) {
       result.endIcon = rest.endIcon
-      result.onEndIconAction = rest.onEndIconAction
+      if ('onEndIconAction' in rest) {
+        result.onEndIconAction = rest.onEndIconAction
+      }
     }
 
     return result
-  }, [multiline, rest, onChange])
+  }, [multiline, rest])
 
   const negative = error || (maxLength && (value?.length ?? 0) > maxLength)
   return (
@@ -71,7 +69,7 @@ export default function TextInput({
         placeholder={placeholder}
         name={name}
         value={value}
-        onChange={handleChange}
+        onChange={onChange}
         className={cx(
           styles.input,
           {
@@ -97,16 +95,21 @@ export default function TextInput({
           {placeholder}
         </label>
       )}
-      {endIcon && (
-        <Button.Icon
-          disabled={disabled}
-          variant="pure"
-          size="sm"
-          name={endIcon}
-          onClick={onEndIconAction}
-          className={styles.endIcon}
-        />
-      )}
+      {endIcon &&
+        (onEndIconAction ? (
+          <Button.Icon
+            disabled={disabled}
+            variant="pure"
+            size="sm"
+            name={endIcon}
+            onClick={onEndIconAction}
+            className={styles.endIcon}
+          />
+        ) : (
+          <div className={styles.endIconWrapper}>
+            <Icon name={endIcon} className={styles.endIcon} />
+          </div>
+        ))}
 
       <div className={cx(styles.footer, { [styles.error]: error })}>
         {error && (

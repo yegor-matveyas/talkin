@@ -9,4 +9,7 @@ import Typography from './Atoms/Typography/Typography'
 import PasswordInput from './Molecules/PasswordInput/PasswordInput'
 import SearchInput from './Molecules/SearchInput/SearchInput'
 
-export { Button, Counter, Icon, Input, Typography, PasswordInput, SearchInput }
+// Pages
+import Auth from './Pages/Auth/Auth'
+
+export { Auth, Button, Counter, Icon, Input, Typography, PasswordInput, SearchInput }

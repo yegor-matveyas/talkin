@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react'
 import type { ComponentDefaultProps } from '@types'
 import type { IconName } from '../../Icon/Icon'
 
@@ -13,14 +14,14 @@ export type TextInputProps = ComponentDefaultProps & {
   minLength?: number
   name: string
   value: string
-  onChange: (newValue: string) => void
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
 } & (DefaultTextInputProps | MultilineTextInputProps)
 
 export type DefaultTextInputProps = {
-  clearable?: boolean
   inputType?: 'text' | 'password' | 'email'
   startIcon?: IconName
   endIcon?: IconName
+  onClear?: () => void
   onEndIconAction?: () => void
 }
 
@@ -29,4 +30,4 @@ export type MultilineTextInputProps = {
   rows?: number
 }
 
-export type IconsProps = { startIcon?: IconName; endIcon?: IconName; onEndIconAction?: () => void }
+export type InputIconsArgs = { startIcon?: IconName; endIcon?: IconName; onEndIconAction?: () => void }

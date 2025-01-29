@@ -1,17 +1,25 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import type { TextInputProps, DefaultTextInputProps, MultilineTextInputProps } from './TextInput.types'
 import TextInput from './TextInput'
 
 type TextInputWithStateProps = { defaultValue?: string } & Omit<TextInputProps, 'value' | 'onChange'> &
-  (DefaultTextInputProps | MultilineTextInputProps)
+  (DefaultTextInputProps | MultilineTextInputProps) & { clearable?: boolean }
 
 const meta: Meta<typeof TextInput> = {
   component: TextInput,
   title: 'Atoms/Input/Text',
-  render: function TextInputWithState({ defaultValue = '', ...rest }: TextInputWithStateProps) {
+  render: function TextInputWithState({ defaultValue = '', clearable, ...rest }: TextInputWithStateProps) {
     const [value, setValue] = useState<string>(defaultValue)
-    return <TextInput value={value} onChange={setValue} {...rest} />
+
+    const restProps = useMemo(() => {
+      if (clearable) {
+        return { onClear: () => setValue(' ') }
+      }
+      return {}
+    }, [clearable])
+
+    return <TextInput value={value} onChange={(e) => setValue(e.target.value)} {...rest} {...restProps} />
   },
   parameters: { controls: { exclude: ['multiline', 'style', 'className', 'value', 'onChange'] } },
 }
