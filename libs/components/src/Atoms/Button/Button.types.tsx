@@ -6,6 +6,7 @@ export type ButtonVariant = 'contained' | 'outlined' | 'text'
 export interface ButtonProps extends HTMLProps<HTMLButtonElement> {
   negative?: boolean
   disabled?: boolean
+  fullWidth?: boolean
   type?: ButtonTypes
   variant?: ButtonVariant
 }

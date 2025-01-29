@@ -10,6 +10,7 @@ import styles from './Button.module.scss'
 export default function Button({
   negative,
   disabled,
+  fullWidth,
   type = 'button',
   variant = 'contained',
   children,
@@ -31,7 +32,12 @@ export default function Button({
     <button
       type={type}
       disabled={disabled}
-      className={cx(styles.button, styles[variant], { [styles.negative]: negative }, className)}
+      className={cx(
+        styles.button,
+        styles[variant],
+        { [styles.negative]: negative, [styles.fullwidth]: fullWidth },
+        className
+      )}
       style={style}
       {...buttonProps}
     >

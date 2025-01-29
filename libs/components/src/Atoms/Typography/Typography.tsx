@@ -10,6 +10,7 @@ export default function Typography({
   negative,
   warning,
   variant,
+  align = 'left',
   children = '',
   className = '',
   style = {},
@@ -21,6 +22,7 @@ export default function Typography({
       className={cx(
         styles.typography,
         styles[variant],
+        styles[align],
         { [styles.primary]: primary, [styles.negative]: negative, [styles.warning]: warning },
         className
       )}
