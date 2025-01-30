@@ -4,15 +4,6 @@ import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 
 import { User } from '../users/users.entity'
 
-@InputType()
-export class AuthInput {
-  @Field()
-  username: string
-
-  @Field()
-  password: string
-}
-
 @ObjectType()
 @Entity()
 export class AuthCredentials {
@@ -31,6 +22,30 @@ export class AuthCredentials {
 
   @ManyToOne(() => User, (user) => user.credentials)
   user: User
+}
+
+@InputType()
+export class LoginInput {
+  @Field()
+  username: string
+
+  @Field()
+  password: string
+}
+
+@InputType()
+export class SignUpInput {
+  @Field()
+  username: string
+
+  @Field()
+  email: string
+
+  @Field()
+  password: string
+
+  @Field()
+  confirmPassword: string
 }
 
 export type TAuthCredentials = Omit<AuthCredentials, 'id' | 'user'>

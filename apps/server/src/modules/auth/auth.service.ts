@@ -28,7 +28,7 @@ export class AuthService {
     return null
   }
 
-  async login(user: User): Promise<TAuthCredentials> {
+  async login(user: User): Promise<AuthCredentials> {
     return await this.generateTokens(user)
   }
 
@@ -37,14 +37,12 @@ export class AuthService {
     return true
   }
 
-  async refreshTokens(currentRefreshToken: string): Promise<TAuthCredentials> {
+  async refreshTokens(currentRefreshToken: string): Promise<AuthCredentials> {
     const user = await this.deleteToken(currentRefreshToken)
-
-    const { accessToken, refreshToken, expiresAt } = await this.generateTokens(user)
-    return { accessToken, refreshToken, expiresAt }
+    return await this.generateTokens(user)
   }
 
-  private async generateTokens(user: User): Promise<TAuthCredentials> {
+  private async generateTokens(user: User): Promise<AuthCredentials> {
     const payload = { userId: user.userId, username: user.username }
 
     const existingCreds = await this.credentialsRepository.findOneBy({ user })
@@ -54,12 +52,13 @@ export class AuthService {
 
     const accessToken = await this.jwtService.signAsync(payload, { expiresIn: '15m' })
 
-    const creds = new AuthCredentials()
-    creds.refreshToken = refreshToken
-    creds.user = user
-    await this.credentialsRepository.save(creds)
+    const credsData = new AuthCredentials()
+    credsData.refreshToken = refreshToken
+    credsData.user = user
+    const creds = await this.credentialsRepository.save(credsData)
 
     return {
+      ...creds,
       accessToken,
       refreshToken,
       expiresAt: dayjs().add(15, 'm').toDate(),

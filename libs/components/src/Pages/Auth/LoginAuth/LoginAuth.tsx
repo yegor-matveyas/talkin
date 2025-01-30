@@ -2,21 +2,20 @@ import { ApolloError } from '@apollo/client'
 
 import { useFormik } from 'formik'
 
+import AuthForm from '../../../Templates/AuthForm/AuthForm'
 import Input from '../../../Atoms/Input/Input'
 import PasswordInput from '../../../Molecules/PasswordInput/PasswordInput'
 
-import AuthForm from '../../../Templates/AuthForm/AuthForm'
-
-import { TAuthInput } from './LoginAuth.types'
+import { LoginInput } from '../Auth.types'
 
 type LoginAuthProps = {
   loading: boolean
   error?: ApolloError
-  onSubmit: ({ username, password }: TAuthInput) => void
+  onSubmit: (input: LoginInput) => void
 }
 
 export default function LoginAuth({ onSubmit }: LoginAuthProps) {
-  const { values, handleSubmit, handleChange } = useFormik<TAuthInput>({
+  const { values, handleSubmit, handleChange } = useFormik<LoginInput>({
     initialValues: {
       username: '',
       password: '',

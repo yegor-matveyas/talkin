@@ -8,11 +8,6 @@ type AuthCredentials {
   refreshToken: String!
 }
 
-input AuthInput {
-  password: String!
-  username: String!
-}
-
 type Chat {
   chatId: UUID!
   chatType: ChatType!
@@ -44,6 +39,11 @@ input CreateUserInput {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+input LoginInput {
+  password: String!
+  username: String!
+}
 
 type Message {
   chat: Chat!
@@ -95,10 +95,11 @@ enum MessageType {
 type Mutation {
   createChat(createChatInput: CreateChatInput!): Chat!
   createUser(createUserInput: CreateUserInput!): User!
-  login(authInput: AuthInput!): AuthCredentials!
+  login(loginInput: LoginInput!): AuthCredentials!
   logout: Boolean!
   refreshTokens: AuthCredentials!
   sendMessage(sendMessageInput: SendMessageInput!): Message!
+  signUp(signUpInput: SignUpInput!): AuthCredentials!
 }
 
 type Query {
@@ -111,6 +112,13 @@ input SendMessageInput {
   chatId: UUID!
   nodes: [MessageNodeInput!]!
   senderId: UUID!
+}
+
+input SignUpInput {
+  confirmPassword: String!
+  email: String!
+  password: String!
+  username: String!
 }
 
 """A simple UUID parser"""

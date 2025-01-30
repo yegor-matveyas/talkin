@@ -3,14 +3,15 @@ import { useMutation } from '@apollo/client'
 import { AuthUtils } from '@utils'
 import { TAuthCredentials } from '@types'
 
+import { LoginInput } from '../Auth.types'
+
 import LoginAuth from './LoginAuth'
-import { TAuthInput } from './LoginAuth.types'
 import { LOGIN } from './LoginAuth.ql'
 
 export default function LoginAuthContainer() {
-  const [login, { loading, error }] = useMutation<TAuthCredentials, TAuthInput>(LOGIN)
+  const [login, { loading, error }] = useMutation<TAuthCredentials, LoginInput>(LOGIN)
 
-  const handleSubmit = async ({ username, password }: TAuthInput) => {
+  const handleSubmit = async ({ username, password }: LoginInput) => {
     const { data } = await login({ variables: { username, password } })
 
     if (data?.accessToken) {

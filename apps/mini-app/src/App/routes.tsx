@@ -23,6 +23,10 @@ export const routes: RouteObject[] = [
         path: 'login',
         element: <Auth.Login />,
       },
+      {
+        path: 'signup',
+        element: <Auth.Signup />,
+      },
     ],
   },
 ]
