@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+import { LinkProps } from 'react-router-dom'
 import cx from 'classnames'
 
 import type { TypographyProps } from './Typography.types'
@@ -14,8 +16,17 @@ export default function Typography({
   children = '',
   className = '',
   style = {},
+  ...rest
 }: TypographyProps) {
   const Element = TypographyElements[variant]
+
+  const linkProps = useMemo<Partial<LinkProps>>(() => {
+    if (variant !== 'link') return {}
+    return {
+      to: rest.to,
+      replace: rest.replace,
+    }
+  }, [variant, rest])
 
   return (
     <Element
@@ -27,6 +38,7 @@ export default function Typography({
         className
       )}
       style={style}
+      {...linkProps}
     >
       {children}
     </Element>

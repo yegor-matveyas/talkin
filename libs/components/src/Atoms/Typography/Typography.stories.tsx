@@ -41,3 +41,11 @@ export const Caption: Story = {
     children: 'Typography Caption',
   },
 }
+
+export const Link: Story = {
+  args: {
+    ...Text.args,
+    variant: 'link',
+    children: 'Typography Link',
+  },
+}

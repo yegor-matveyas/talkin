@@ -31,6 +31,10 @@ export default function LoginAuth({ onSubmit }: LoginAuthProps) {
         'This is a mini-version of the Talkin application represented by the text chat.',
       ]}
       submitMessage="LOG IN"
+      actionLink={{
+        text: 'Sign up',
+        to: '/auth/signup',
+      }}
       onSubmit={handleSubmit}
     >
       <Input.Text name="username" placeholder="Username" value={values.username} onChange={handleChange} />
