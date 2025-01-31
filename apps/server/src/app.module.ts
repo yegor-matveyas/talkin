@@ -24,6 +24,7 @@ import { dataSourceOptions } from './typeorm.config'
       resolvers: { UUID: UUIDScalar },
       autoSchemaFile: join(process.cwd(), process.env.GRAPHQL_SCHEMA_PATH),
       sortSchema: true,
+      context: ({ req, res }) => ({ req, res }),
     }),
     AuthModule,
     UsersModule,

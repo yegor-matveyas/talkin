@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client'
+import { useNavigate } from 'react-router-dom'
 
 import { AuthUtils } from '@utils'
 import { TAuthCredentials } from '@types'
@@ -9,13 +10,15 @@ import LoginAuth from './LoginAuth'
 import { LOGIN } from './LoginAuth.ql'
 
 export default function LoginAuthContainer() {
-  const [login, { loading, error }] = useMutation<TAuthCredentials, LoginInput>(LOGIN)
+  const navigate = useNavigate()
+
+  const [login, { loading, error }] = useMutation<{ login: TAuthCredentials }, LoginInput>(LOGIN)
 
   const handleSubmit = async ({ username, password }: LoginInput) => {
     const { data } = await login({ variables: { username, password } })
-
-    if (data?.accessToken) {
-      AuthUtils.setAccessToken(data.accessToken)
+    if (data?.login) {
+      AuthUtils.setAccessToken(data.login.accessToken)
+      navigate('/')
     }
   }
 

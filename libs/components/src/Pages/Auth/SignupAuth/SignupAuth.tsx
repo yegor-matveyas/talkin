@@ -37,7 +37,7 @@ export default function SignupAuth({ onSubmit }: SignUpAuthProps) {
       onSubmit={handleSubmit}
     >
       <Input.Text name="username" placeholder="Username" value={values.username} onChange={handleChange} />
-      <Input.Text inputType="email" name="email" placeholder="Email" value={values.username} onChange={handleChange} />
+      <Input.Text inputType="email" name="email" placeholder="Email" value={values.email} onChange={handleChange} />
       <PasswordInput name="password" placeholder="Password" value={values.password} onChange={handleChange} />
       <PasswordInput
         name="confirmPassword"

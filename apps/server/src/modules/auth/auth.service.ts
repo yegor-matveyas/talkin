@@ -9,7 +9,7 @@ import { Repository } from 'typeorm'
 import { UsersService } from '../users/users.service'
 import { User } from '../users/users.entity'
 
-import { AuthCredentials, TAuthCredentials, TCurrentUser } from './auth.entity'
+import { AuthCredentials, TCurrentUser } from './auth.entity'
 
 @Injectable()
 export class AuthService {

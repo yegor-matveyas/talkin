@@ -29,30 +29,28 @@ export default function AuthForm({
   onSubmit,
 }: IAuthFormProps) {
   return (
-    <div className={styles.wrapper}>
-      <form onSubmit={onSubmit} className={styles.form}>
-        <div className={styles.header}>
-          <Typography variant="subtitle" align="center">
-            {title}
+    <form onSubmit={onSubmit} className={styles.form}>
+      <div className={styles.header}>
+        <Typography variant="subtitle" align="center">
+          {title}
+        </Typography>
+        {description.map((line) => (
+          <Typography key={line} variant="caption" align="center">
+            {line}
           </Typography>
-          {description.map((line) => (
-            <Typography key={line} variant="caption" align="center">
-              {line}
-            </Typography>
-          ))}
-        </div>
-        {children}
-        <div className={styles.actions}>
-          <Button fullWidth type="submit" variant="contained">
-            {submitMessage}
-          </Button>
-          {actionLink && (
-            <Typography variant="link" to={actionLink.to}>
-              {actionLink.text}
-            </Typography>
-          )}
-        </div>
-      </form>
-    </div>
+        ))}
+      </div>
+      {children}
+      <div className={styles.actions}>
+        <Button fullWidth type="submit" variant="contained">
+          {submitMessage}
+        </Button>
+        {actionLink && (
+          <Typography variant="link" to={actionLink.to}>
+            {actionLink.text}
+          </Typography>
+        )}
+      </div>
+    </form>
   )
 }

@@ -5,7 +5,6 @@
 type AuthCredentials {
   accessToken: String!
   expiresAt: DateTime!
-  refreshToken: String!
 }
 
 type Chat {
@@ -115,7 +114,6 @@ input SendMessageInput {
 }
 
 input SignUpInput {
-  confirmPassword: String!
   email: String!
   password: String!
   username: String!

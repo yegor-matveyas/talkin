@@ -16,7 +16,6 @@ export class AuthCredentials {
   @Field()
   expiresAt: Date
 
-  @Field()
   @Column()
   refreshToken: string
 
@@ -43,9 +42,6 @@ export class SignUpInput {
 
   @Field()
   password: string
-
-  @Field()
-  confirmPassword: string
 }
 
 export type TAuthCredentials = Omit<AuthCredentials, 'id' | 'user'>

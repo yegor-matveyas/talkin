@@ -18,6 +18,7 @@ export const routes: RouteObject[] = [
   },
   {
     path: 'auth',
+    element: <Auth.Layout />,
     children: [
       {
         path: 'login',
