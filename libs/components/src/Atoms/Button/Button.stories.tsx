@@ -30,3 +30,10 @@ export const Text: Story = {
     variant: 'text',
   },
 }
+
+export const loading: Story = {
+  args: {
+    ...Contained.args,
+    loading: true,
+  },
+}

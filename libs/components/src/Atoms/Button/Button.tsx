@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import cx from 'classnames'
 
+import Progress from '../Progress/Progress'
 import IconButton from './IconButton/IconButton'
 
 import type { ButtonProps } from './Button.types'
@@ -8,6 +9,7 @@ import type { ButtonProps } from './Button.types'
 import styles from './Button.module.scss'
 
 export default function Button({
+  loading,
   negative,
   disabled,
   fullWidth,
@@ -35,13 +37,14 @@ export default function Button({
       className={cx(
         styles.button,
         styles[variant],
-        { [styles.negative]: negative, [styles.fullwidth]: fullWidth },
+        { [styles.negative]: negative, [styles.fullwidth]: fullWidth, [styles.loading]: loading },
         className
       )}
       style={style}
       {...buttonProps}
     >
       {children}
+      {loading && <Progress.Circular className={styles.spinner} />}
     </button>
   )
 }

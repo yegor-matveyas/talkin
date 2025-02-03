@@ -1,0 +1,47 @@
+@use 'base/variables' as *;
+
+.wrapper {
+  position: absolute;
+  background-color: transparent;
+
+  &.primary {
+    color: $primary;
+  }
+
+  &.white {
+    color: $white;
+  }
+
+  & .spinner {
+    color: inherit;
+    background-color: transparent;
+    animation: rotate 1.4s linear infinite;
+
+    & .circle {
+      color: inherit;
+      stroke: currentColor;
+      animation: dash 1.4s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: -125;
+  }
+}

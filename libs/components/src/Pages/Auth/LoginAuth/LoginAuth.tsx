@@ -9,12 +9,12 @@ import PasswordInput from '../../../Molecules/PasswordInput/PasswordInput'
 import { LoginInput } from '../Auth.types'
 
 type LoginAuthProps = {
-  loading: boolean
+  loading?: boolean
   error?: ApolloError
   onSubmit: (input: LoginInput) => void
 }
 
-export default function LoginAuth({ onSubmit }: LoginAuthProps) {
+export default function LoginAuth({ loading, onSubmit }: LoginAuthProps) {
   const { values, handleSubmit, handleChange } = useFormik<LoginInput>({
     initialValues: {
       username: '',
@@ -37,8 +37,20 @@ export default function LoginAuth({ onSubmit }: LoginAuthProps) {
       }}
       onSubmit={handleSubmit}
     >
-      <Input.Text name="username" placeholder="Username" value={values.username} onChange={handleChange} />
-      <PasswordInput name="password" placeholder="Password" value={values.password} onChange={handleChange} />
+      <Input.Text
+        disabled={loading}
+        name="username"
+        placeholder="Username"
+        value={values.username}
+        onChange={handleChange}
+      />
+      <PasswordInput
+        disabled={loading}
+        name="password"
+        placeholder="Password"
+        value={values.password}
+        onChange={handleChange}
+      />
     </AuthForm>
   )
 }
