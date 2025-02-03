@@ -6,7 +6,7 @@ import { CreateUserInput } from '../users/users.entity'
 
 import { Cookies } from './auth.guard'
 import { AuthService } from './auth.service'
-import { RefreshTokenCookieInterceptor } from './auth.interceptor'
+import { ClearCookiesInterceptor, RefreshTokenCookieInterceptor } from './interceptors'
 import { LoginInput, SignUpInput, AuthCredentials } from './auth.entity'
 
 @Resolver()
@@ -42,6 +42,7 @@ export class AuthResolver {
   }
 
   @Mutation(() => Boolean)
+  @UseInterceptors(ClearCookiesInterceptor)
   async logout(@Cookies() cookies: { refreshToken: string }) {
     const token = cookies.refreshToken
     return this.authService.logout(token)
