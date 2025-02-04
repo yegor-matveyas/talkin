@@ -1,6 +1,8 @@
 import { UnauthorizedException, UseInterceptors } from '@nestjs/common'
 import { Args, Mutation, Resolver } from '@nestjs/graphql'
 
+import { ErrorMessage } from '@utils'
+
 import { UsersService } from '../users/users.service'
 import { CreateUserInput } from '../users/users.entity'
 
@@ -18,7 +20,7 @@ export class AuthResolver {
   async login(@Args('loginInput') loginInput: LoginInput) {
     const user = await this.authService.validateUser(loginInput.username, loginInput.password)
     if (!user) {
-      throw new UnauthorizedException()
+      throw new UnauthorizedException(ErrorMessage.UNAUTHENTICATED)
     }
     return this.authService.login(user)
   }

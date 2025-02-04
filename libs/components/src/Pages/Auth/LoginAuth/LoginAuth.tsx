@@ -8,18 +8,21 @@ import PasswordInput from '../../../Molecules/PasswordInput/PasswordInput'
 
 import { LoginInput } from '../Auth.types'
 
+import { schema } from './LoginAuth.utils'
+
 type LoginAuthProps = {
   loading?: boolean
   error?: ApolloError
   onSubmit: (input: LoginInput) => void
 }
 
-export default function LoginAuth({ loading, onSubmit }: LoginAuthProps) {
-  const { values, handleSubmit, handleChange } = useFormik<LoginInput>({
+export default function LoginAuth({ loading, error, onSubmit }: LoginAuthProps) {
+  const { values, errors, touched, handleBlur, handleSubmit, handleChange } = useFormik<LoginInput>({
     initialValues: {
       username: '',
       password: '',
     },
+    validationSchema: schema,
     onSubmit,
   })
 
@@ -42,14 +45,18 @@ export default function LoginAuth({ loading, onSubmit }: LoginAuthProps) {
         name="username"
         placeholder="Username"
         value={values.username}
+        error={touched.username ? error?.message || errors.username : undefined}
         onChange={handleChange}
+        onBlur={handleBlur}
       />
       <PasswordInput
         disabled={loading}
         name="password"
         placeholder="Password"
         value={values.password}
+        error={touched.password ? error?.message || errors.password : undefined}
         onChange={handleChange}
+        onBlur={handleBlur}
       />
     </AuthForm>
   )

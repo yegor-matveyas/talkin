@@ -1,3 +1,5 @@
 import AuthUtils from './AuthUtils'
 
-export { AuthUtils }
+import { ErrorMessage } from './constants'
+
+export { AuthUtils, ErrorMessage }
