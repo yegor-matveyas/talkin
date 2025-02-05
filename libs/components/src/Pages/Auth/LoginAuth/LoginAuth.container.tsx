@@ -1,8 +1,10 @@
 import { useMutation } from '@apollo/client'
 import { useNavigate } from 'react-router-dom'
 
-import { AuthUtils } from '@utils'
+import { AuthUtils, ErrorMessage } from '@utils'
 import { TAuthCredentials } from '@types'
+
+import Error from '../../Error/Error'
 
 import { LoginInput } from '../Auth.types'
 
@@ -20,6 +22,10 @@ export default function LoginAuthContainer() {
       AuthUtils.setAccessToken(data.login.accessToken)
       navigate('/')
     }
+  }
+
+  if (error && error.message !== ErrorMessage.UNAUTHENTICATED) {
+    return <Error error={error} />
   }
 
   return <LoginAuth loading={loading} error={error} onSubmit={handleSubmit} />
