@@ -1,4 +1,4 @@
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs'
 
 export default class AuthUtils {
   static ACCESS_TOKEN = 'ACCESS_TOKEN'
@@ -24,6 +24,7 @@ export default class AuthUtils {
 
   static deleteAccessToken() {
     localStorage.removeItem(this.ACCESS_TOKEN)
+    localStorage.removeItem(this.EXPIRES_AT)
   }
 
   static isAuthenticated() {
