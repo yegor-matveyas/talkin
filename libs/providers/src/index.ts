@@ -1,3 +1,3 @@
-import ApolloProvider from './Apollo.provider'
+import ApolloProvider from './Apollo/Apollo.provider'
 
 export { ApolloProvider }

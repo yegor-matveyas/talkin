@@ -4,6 +4,8 @@ import { onError } from '@apollo/client/link/error'
 
 import { AuthUtils } from '@utils'
 
+import { useRefreshLink } from './Apollo.hooks'
+
 const authLink = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers }: { headers: Headers }) => ({
     headers: {
@@ -36,12 +38,18 @@ export default function ApolloProvider({ serverUri, children }: ApolloProviderPr
     })
   }, [serverUri])
 
+  const cache = useMemo(() => {
+    return new InMemoryCache()
+  }, [])
+
+  const refreshLink = useRefreshLink(httpLink, cache)
+
   const client = useMemo(() => {
     return new ApolloClient({
-      link: from([errorLink, authLink, httpLink]),
-      cache: new InMemoryCache(),
+      link: from([errorLink, refreshLink, authLink, httpLink]),
+      cache,
     })
-  }, [httpLink])
+  }, [cache, refreshLink, httpLink])
 
   return <Provider client={client}>{children}</Provider>
 }
