@@ -38,6 +38,7 @@ export class AuthResolver {
   }
 
   @Mutation(() => AuthCredentials)
+  @UseInterceptors(RefreshTokenCookieInterceptor)
   async refreshTokens(@Cookies() cookies: { refreshToken: string }) {
     const token = cookies.refreshToken
     return this.authService.refreshTokens(token)

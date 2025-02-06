@@ -1,4 +1,4 @@
 export type TAuthCredentials = {
   accessToken: string
-  expiresAt: Date
+  expiresAt: string
 }

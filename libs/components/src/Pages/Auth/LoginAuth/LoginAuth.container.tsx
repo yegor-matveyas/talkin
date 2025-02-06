@@ -19,7 +19,7 @@ export default function LoginAuthContainer() {
   const handleSubmit = async ({ username, password }: LoginInput) => {
     const { data } = await login({ variables: { username, password } })
     if (data?.login) {
-      AuthUtils.setAccessToken(data.login.accessToken)
+      AuthUtils.setAccessToken(data.login.accessToken, data.login.expiresAt)
       navigate('/')
     }
   }
