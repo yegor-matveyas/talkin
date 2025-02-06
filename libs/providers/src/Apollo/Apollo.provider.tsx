@@ -4,7 +4,7 @@ import { onError } from '@apollo/client/link/error'
 
 import { AuthUtils } from '@utils'
 
-import { useRefreshLink } from './Apollo.hooks'
+import { useRefreshLink } from './Apollo.utils'
 
 const authLink = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers }: { headers: Headers }) => ({

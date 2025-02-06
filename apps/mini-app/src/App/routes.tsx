@@ -28,6 +28,10 @@ export const routes: RouteObject[] = [
         path: 'signup',
         element: <Auth.Signup />,
       },
+      {
+        path: 'timedout',
+        element: <Auth.Timeout />,
+      },
     ],
   },
 ]
