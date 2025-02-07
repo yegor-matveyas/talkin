@@ -1,0 +1,13 @@
+@use 'base/variables' as *;
+
+.wrapper {
+  display: flex;
+}
+
+.sidebar {
+  max-width: 256px;
+  width: 100%;
+  height: calc(100vh - 24px);
+  padding: 12px;
+  box-shadow: 4px 0 8px 0 rgba(81, 98, 112, 0.39);
+}

@@ -11,5 +11,14 @@ export default function SearchInput({ name = 'search-input', onSearch, ...rest }
 
   useDebounce(() => onSearch(value), 1000, [value])
 
-  return <Input.Text clearable startIcon="search" name={name} value={value} onChange={setValue} {...rest} />
+  return (
+    <Input.Text
+      startIcon="search"
+      name={name}
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      onClear={() => setValue('')}
+      {...rest}
+    />
+  )
 }

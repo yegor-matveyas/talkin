@@ -42,7 +42,6 @@ export function useRefreshLink<T>(httpLink: HttpLink, cache: ApolloCache<T>): Ap
     return new Observable((observer) => {
       refreshAccessToken(refreshClient)
         .then((newAccessToken) => {
-          console.log('newAccessToken ', newAccessToken)
           if (newAccessToken) {
             operation.setContext(({ headers = {} }) => ({
               headers: {

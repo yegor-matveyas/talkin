@@ -1,7 +1,9 @@
 import { Outlet } from 'react-router-dom'
 import { ApolloError } from '@apollo/client'
 
-import { Button } from '@components'
+import { Button, SearchInput } from '@components'
+
+import styles from './Layout.module.scss'
 
 type TLayoutProps = {
   loading?: boolean
@@ -10,11 +12,17 @@ type TLayoutProps = {
 }
 
 export default function Layout({ loading, error, onLogout }: TLayoutProps) {
+  const handleSearch = (search: string) => {
+    console.log('search ', search)
+  }
+
   return (
-    <div>
-      <h1>Layout</h1>
+    <main className={styles.wrapper}>
+      <section className={styles.sidebar}>
+        <SearchInput onSearch={handleSearch} />
+        <Button onClick={onLogout}>Log out</Button>
+      </section>
       <Outlet />
-      <Button onClick={onLogout}>Log out</Button>
-    </div>
+    </main>
   )
 }
