@@ -28,6 +28,10 @@ export default class AuthUtils {
   }
 
   static isAuthenticated() {
+    const expiresAt = dayjs(localStorage.getItem(this.EXPIRES_AT)).add(7, 'day')
+    if (dayjs().isAfter(expiresAt)) {
+      this.deleteAccessToken()
+    }
     return Boolean(this.getAccessToken())
   }
 
