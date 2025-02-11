@@ -19,7 +19,6 @@ export class ChatsService {
     @InjectRepository(Chat)
     private chatsRepository: Repository<Chat>,
     private readonly usersService: UsersService,
-
     @Inject(forwardRef(() => MessagesService))
     private readonly messsagesService: MessagesService
   ) {}
