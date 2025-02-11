@@ -8,6 +8,7 @@ import { UUIDScalar } from '../../graphql/scalars'
 import { AuthCredentials } from '../auth/auth.entity'
 import { Message } from '../messages/messages.entity'
 import { MessageNodeMention } from '../messages/nodes/nodes.entity'
+import { ChatRequest } from '../chats/requests/requests.entity'
 
 @ObjectType()
 @Entity()
@@ -41,6 +42,14 @@ export class User {
 
   @OneToMany(() => Message, (message) => message.sender)
   messages: Message[]
+
+  @Field(() => [ChatRequest])
+  @OneToMany(() => ChatRequest, (request) => request.sender)
+  sentChatRequests: ChatRequest[]
+
+  @Field(() => [ChatRequest])
+  @OneToMany(() => ChatRequest, (request) => request.receiver)
+  receivedChatRequests: ChatRequest[]
 }
 
 @InputType()
