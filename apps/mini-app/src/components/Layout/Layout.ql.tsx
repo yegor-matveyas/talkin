@@ -5,3 +5,19 @@ export const LOGOUT = gql`
     logout
   }
 `
+
+export default {
+  logout: gql`
+    mutation logout {
+      logout
+    }
+  `,
+  search: gql`
+    query users($username: String) {
+      users(where: { username: $username }) {
+        userId
+        username
+      }
+    }
+  `,
+}

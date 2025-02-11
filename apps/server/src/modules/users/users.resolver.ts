@@ -26,8 +26,11 @@ export class UsersResolver {
 
   @UseGuards(AuthGuard)
   @Query(() => [User], { nullable: true })
-  async users(@Args('where', { nullable: true }) where: UsersWhereInput): Promise<User[]> {
-    return this.usersService.getUsers(where)
+  async users(
+    @Args('where', { nullable: true }) where: UsersWhereInput,
+    @CurrentUser() currentUser: User
+  ): Promise<User[]> {
+    return this.usersService.getUsers(where, currentUser)
   }
 
   @Mutation(() => User)

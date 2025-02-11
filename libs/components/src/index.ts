@@ -11,5 +11,6 @@ import SearchInput from './Molecules/SearchInput/SearchInput'
 
 // Pages
 import Auth from './Pages/Auth/Auth'
+import Error from './Pages/Error/Error'
 
-export { Auth, Button, Counter, Icon, Input, Typography, PasswordInput, SearchInput }
+export { Auth, Button, Counter, Error, Icon, Input, Typography, PasswordInput, SearchInput }
