@@ -1,8 +1,9 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { Field, Int, InputType, ObjectType } from '@nestjs/graphql'
 
 import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 
 import { User } from '../../users/users.entity'
+import { UUIDScalar } from '../../../graphql/scalars'
 
 @ObjectType()
 @Entity()
@@ -18,4 +19,13 @@ export class ChatRequest {
   @Field(() => User)
   @ManyToOne(() => User, (receiver) => receiver.receivedChatRequests)
   receiver: User
+}
+
+@InputType()
+export class SendChatRequestInput {
+  @Field(() => UUIDScalar)
+  senderId: string
+
+  @Field(() => UUIDScalar)
+  receiverId: string
 }
