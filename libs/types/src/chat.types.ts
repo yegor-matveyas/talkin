@@ -1,3 +1,11 @@
+import { TUser } from './user.types'
+
+export type TChat = {
+  chatId: string
+  displayName: string
+  members: TUser[]
+}
+
 export enum ChatType {
   DEFAULT,
   GROUP,

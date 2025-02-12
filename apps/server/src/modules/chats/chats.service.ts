@@ -18,7 +18,10 @@ export class ChatsService {
   constructor(
     @InjectRepository(Chat)
     private chatsRepository: Repository<Chat>,
+
+    @Inject(forwardRef(() => UsersService))
     private readonly usersService: UsersService,
+
     @Inject(forwardRef(() => MessagesService))
     private readonly messsagesService: MessagesService
   ) {}
@@ -55,5 +58,26 @@ export class ChatsService {
       nodes: [{ nodeType: MessageNodeType.EVENT, text }],
     }
     await this.messsagesService.createMessage(data, chat)
+  }
+
+  getChatDisplayName(chat: Chat, currentUser: User): string {
+    if (chat.chatType === ChatType.DEFAULT) {
+      const member = chat.members.find((m) => m.userId !== currentUser.userId)
+      return member.username
+    }
+
+    // TODO Update once group chats have been implemented
+    return chat.chatId
+  }
+
+  async getAllByUser(user: User): Promise<Chat[]> {
+    return await this.chatsRepository.find({
+      relations: ['members'],
+      where: {
+        members: {
+          userId: user.userId,
+        },
+      },
+    })
   }
 }

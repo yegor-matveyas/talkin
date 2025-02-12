@@ -10,12 +10,19 @@ type AuthCredentials {
 type Chat {
   chatId: UUID!
   chatType: ChatType!
+  displayName: String!
   founder: User
   id: Int!
   lastUnreadMessage: Message
   members: [User!]!
   messages: [Message]!
   pinnedMessage: Message
+}
+
+type ChatRequest {
+  id: Int!
+  receiver: User!
+  sender: User!
 }
 
 enum ChatType {
@@ -98,6 +105,7 @@ type Mutation {
   logout: Boolean!
   refreshTokens: AuthCredentials!
   sendMessage(sendMessageInput: SendMessageInput!): Message!
+  sendRequest(sendRequestInput: SendChatRequestInput!): ChatRequest!
   signUp(signUpInput: SignUpInput!): AuthCredentials!
 }
 
@@ -105,6 +113,11 @@ type Query {
   me: User!
   user(where: UserWhereUniqueInput!): User!
   users(where: UsersWhereInput): [User!]
+}
+
+input SendChatRequestInput {
+  receiverId: UUID!
+  senderId: UUID!
 }
 
 input SendMessageInput {
@@ -123,8 +136,11 @@ input SignUpInput {
 scalar UUID
 
 type User {
+  chats: [Chat!]
   email: String!
   id: Int!
+  receivedChatRequests: [ChatRequest!]!
+  sentChatRequests: [ChatRequest!]!
   userId: UUID!
   username: String!
 }

@@ -12,8 +12,12 @@ import { ChatRequestsResolver } from './requests/requests.resolver'
 import { ChatRequestsService } from './requests/requests.service'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Chat, ChatRequest]), UsersModule, forwardRef(() => MessagesModule)],
+  imports: [
+    TypeOrmModule.forFeature([Chat, ChatRequest]),
+    forwardRef(() => UsersModule),
+    forwardRef(() => MessagesModule),
+  ],
   providers: [ChatsResolver, ChatRequestsResolver, ChatsService, ChatRequestsService],
-  exports: [TypeOrmModule, ChatsService],
+  exports: [ChatsService, TypeOrmModule],
 })
 export class ChatsModule {}

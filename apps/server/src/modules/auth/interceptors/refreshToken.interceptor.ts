@@ -3,6 +3,7 @@ import { GqlExecutionContext } from '@nestjs/graphql'
 import { Observable } from 'rxjs'
 import { tap } from 'rxjs/operators'
 import { Response } from 'express'
+import dayjs from 'dayjs'
 
 import { AuthCredentials } from '../auth.entity'
 
@@ -13,7 +14,8 @@ export class RefreshTokenCookieInterceptor implements NestInterceptor {
     const response: Response = ctx.getContext().res
     return next.handle().pipe(
       tap<AuthCredentials>((data) => {
-        response.cookie('refreshToken', data.refreshToken, { httpOnly: true })
+        const expiresAt = dayjs(data.expiresAt).subtract(15, 'minute').add(7, 'day').toDate()
+        response.cookie('refreshToken', data.refreshToken, { httpOnly: true, expires: expiresAt })
       })
     )
   }

@@ -21,6 +21,7 @@ export default function TextInput({
   name,
   value,
   onChange,
+  onFocus,
   onBlur,
   className = '',
   style = {},
@@ -71,6 +72,7 @@ export default function TextInput({
         name={name}
         value={value}
         onChange={onChange}
+        onFocus={onFocus}
         onBlur={onBlur}
         className={cx(
           styles.input,

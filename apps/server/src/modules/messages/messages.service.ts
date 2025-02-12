@@ -18,6 +18,8 @@ export class MessagesService {
   constructor(
     @InjectRepository(Message) private readonly messageRepository: Repository<Message>,
     private nodesService: NodesService,
+
+    @Inject(forwardRef(() => UsersService))
     private usersService: UsersService,
 
     @Inject(forwardRef(() => ChatsService))

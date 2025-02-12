@@ -2,6 +2,7 @@ import { DataSourceOptions, DataSource } from 'typeorm'
 
 import { AuthCredentials } from './modules/auth/auth.entity'
 import { Chat } from './modules/chats/chats.entity'
+import { ChatRequest } from './modules/chats/requests/requests.entity'
 import { Message } from './modules/messages/messages.entity'
 import {
   MessageNode,
@@ -18,7 +19,17 @@ export const dataSourceOptions: DataSourceOptions = {
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [AuthCredentials, User, Message, MessageNode, MessageNodeLink, MessageNodeMention, MessageNodeText, Chat],
+  entities: [
+    AuthCredentials,
+    User,
+    Message,
+    MessageNode,
+    MessageNodeLink,
+    MessageNodeMention,
+    MessageNodeText,
+    Chat,
+    ChatRequest,
+  ],
   synchronize: true,
   migrationsRun: true,
 }

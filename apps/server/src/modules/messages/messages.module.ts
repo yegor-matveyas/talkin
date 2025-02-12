@@ -15,7 +15,7 @@ import { Message } from './messages.entity'
 @Module({
   imports: [
     TypeOrmModule.forFeature([Message, MessageNode, MessageNodeLink, MessageNodeMention, MessageNodeText]),
-    UsersModule,
+    forwardRef(() => UsersModule),
     forwardRef(() => ChatsModule),
   ],
   providers: [MessagesResolver, NodesResolver, MessagesService, NodesService],

@@ -15,6 +15,7 @@ export type TextInputProps = ComponentDefaultProps & {
   name: string
   value: string
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+  onFocus?: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
   onBlur?: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
 } & (DefaultTextInputProps | MultilineTextInputProps)
 

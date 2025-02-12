@@ -1,4 +1,5 @@
 // Atoms
+import Avatar from './Atoms/Avatar/Avatar'
 import Button from './Atoms/Button/Button'
 import Counter from './Atoms/Counter/Counter'
 import Icon from './Atoms/Icon/Icon'
@@ -11,5 +12,6 @@ import SearchInput from './Molecules/SearchInput/SearchInput'
 
 // Pages
 import Auth from './Pages/Auth/Auth'
+import Error from './Pages/Error/Error'
 
-export { Auth, Button, Counter, Icon, Input, Typography, PasswordInput, SearchInput }
+export { Auth, Avatar, Button, Counter, Error, Icon, Input, Typography, PasswordInput, SearchInput }
