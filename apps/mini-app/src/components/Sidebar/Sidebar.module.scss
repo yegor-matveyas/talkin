@@ -1,0 +1,31 @@
+@use 'base/variables' as *;
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 256px;
+  width: 100%;
+  height: calc(100vh - 24px);
+  padding: 12px;
+  box-shadow: 4px 0 8px 0 rgba(81, 98, 112, 0.39);
+
+  & .items {
+    flex-grow: 1;
+    overflow-y: auto;
+
+    & .item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      border-radius: 12px;
+      padding: 4px 8px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $greys-1;
+      }
+    }
+  }
+}

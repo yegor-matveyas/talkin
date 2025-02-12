@@ -12,6 +12,15 @@ export default {
       logout
     }
   `,
+  chats: gql`
+    query me {
+      me {
+        chats {
+          id
+        }
+      }
+    }
+  `,
   search: gql`
     query users($username: String) {
       users(where: { username: $username }) {

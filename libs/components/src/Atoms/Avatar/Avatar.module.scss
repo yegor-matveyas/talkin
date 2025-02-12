@@ -1,0 +1,42 @@
+@use 'base/variables' as *;
+
+.avatar {
+  color: $white;
+  border-radius: 50%;
+  line-height: 100%;
+  text-align: center;
+  vertical-align: middle;
+
+  &.fallback {
+    text-align: center;
+    line-height: 150%;
+  }
+
+  &.xs {
+    width: 16px;
+    height: 16px;
+    padding: 4px;
+    font-size: 12px;
+  }
+
+  &.sm {
+    width: 24px;
+    height: 24px;
+    padding: 6px;
+    font-size: 18px;
+  }
+
+  &.md {
+    width: 32px;
+    height: 32px;
+    padding: 8px;
+    font-size: 24px;
+  }
+
+  &.lg {
+    width: 48px;
+    height: 48px;
+    padding: 12px;
+    font-size: 36px;
+  }
+}

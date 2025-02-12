@@ -28,6 +28,9 @@ export class Chat {
   })
   chatType: ChatType
 
+  @Field()
+  displayName: string
+
   @Field(() => [User])
   @ManyToMany(() => User)
   @JoinTable({ name: 'chat_member' })

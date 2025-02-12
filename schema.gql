@@ -10,6 +10,7 @@ type AuthCredentials {
 type Chat {
   chatId: UUID!
   chatType: ChatType!
+  displayName: String!
   founder: User
   id: Int!
   lastUnreadMessage: Message
@@ -135,6 +136,7 @@ input SignUpInput {
 scalar UUID
 
 type User {
+  chats: [Chat!]
   email: String!
   id: Int!
   receivedChatRequests: [ChatRequest!]!

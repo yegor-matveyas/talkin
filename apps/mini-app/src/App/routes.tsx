@@ -3,12 +3,12 @@ import { RouteObject } from 'react-router-dom'
 import { Auth } from '@components'
 
 import ChatContainer from '../components/Chat/Chat.container'
-import LayoutContainer from '../components/Layout/Layout.container'
+import Layout from '../components/Layout/Layout'
 
 export const routes: RouteObject[] = [
   {
     path: '/',
-    element: <LayoutContainer />,
+    element: <Layout />,
     children: [
       {
         path: ':id',

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 
 import { hash } from 'bcryptjs'
-import { In, Not, Like, Repository } from 'typeorm'
+import { And, In, Not, Like, Repository } from 'typeorm'
 
 import { User, CreateUserInput, UsersWhereInput } from './users.entity'
 
@@ -14,7 +14,7 @@ export class UsersService {
     const { username } = where
     if (username === '') return []
     const users = await this.usersRepository.find({
-      where: [{ username: Like(`%${username}%`) }, { username: Not(currentUser.username) }],
+      where: { username: And(Like(`%${username}%`), Not(currentUser.username)) },
     })
     return users
   }

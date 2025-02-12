@@ -1,28 +1,31 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 
 import { Error } from '@components'
 import { useQuery } from '@hooks'
 import { AuthUtils } from '@utils'
-import { TUser } from '@types'
+import { TChat, TUser } from '@types'
 
-import Layout from './Layout'
-import { SearchInput } from './Layout.types'
-import ql from './Layout.ql'
+import Sidebar from './Sidebar'
+import { SearchInput, ListItem } from './Sidebar.types'
+import ql from './Sidebar.ql'
 
 const LOGIN_PAGE_PATH = '/auth/login'
 
 export default function LayoutContainer() {
-  const [search, setSearch] = useState<string>('')
-
   const navigate = useNavigate()
+
+  const [isFocused, setIsFocused] = useState<boolean>(false)
+  const [search, setSearch] = useState<string>('')
 
   const {
     data: usersData,
     loading: usersLoading,
     error: usersError,
   } = useQuery<{ users: [TUser] }, SearchInput>(ql.search, { variables: { username: search } })
+
+  const { data: chatsData } = useQuery<{ me: TUser }>(ql.chats)
 
   const [logout, { loading: logoutLoading, error: logoutError }] = useMutation(ql.logout)
 
@@ -33,6 +36,15 @@ export default function LayoutContainer() {
       navigate(LOGIN_PAGE_PATH)
     }
   }
+
+  const handleChangeFocus = () => setIsFocused((isFocused) => !isFocused)
+
+  const items = useMemo<ListItem[] | undefined>(() => {
+    if (search) {
+      return usersData?.users.map((u) => ({ key: u.userId, title: u.username }))
+    }
+    return chatsData?.me.chats.map((c) => ({ key: c.chatId, title: c.displayName }))
+  }, [search, usersData?.users, chatsData?.me.chats])
 
   useEffect(() => {
     if (!AuthUtils.isAuthenticated()) {
@@ -46,10 +58,11 @@ export default function LayoutContainer() {
   }
 
   return (
-    <Layout
-      users={usersData?.users}
+    <Sidebar
+      items={items}
       usersLoading={usersLoading}
       logoutLoading={logoutLoading}
+      onFocusChange={handleChangeFocus}
       onSearch={setSearch}
       onLogout={handleLogout}
     />
