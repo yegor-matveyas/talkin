@@ -104,8 +104,8 @@ type Mutation {
   login(loginInput: LoginInput!): AuthCredentials!
   logout: Boolean!
   refreshTokens: AuthCredentials!
+  sendChatRequest(sendChatRequestInput: SendChatRequestInput!): ChatRequest!
   sendMessage(sendMessageInput: SendMessageInput!): Message!
-  sendRequest(sendRequestInput: SendChatRequestInput!): ChatRequest!
   signUp(signUpInput: SignUpInput!): AuthCredentials!
 }
 
@@ -136,10 +136,12 @@ input SignUpInput {
 scalar UUID
 
 type User {
+  chatExists: Boolean!
   chats: [Chat!]
   email: String!
   id: Int!
   receivedChatRequests: [ChatRequest!]!
+  requestSent: Boolean!
   sentChatRequests: [ChatRequest!]!
   userId: UUID!
   username: String!

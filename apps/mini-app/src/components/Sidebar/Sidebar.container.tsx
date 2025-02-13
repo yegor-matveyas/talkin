@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@apollo/client'
 
@@ -39,9 +39,22 @@ export default function LayoutContainer() {
 
   const handleChangeFocus = () => setIsFocused((isFocused) => !isFocused)
 
+  const handleItemClick = useCallback((item: ListItem) => {
+    if (item.chatExists) {
+      console.log('chat exists')
+    } else if (item.requestSent) {
+      console.log('request sent')
+    }
+  }, [])
+
   const items = useMemo<ListItem[] | undefined>(() => {
     if (search) {
-      return usersData?.users.map((u) => ({ key: u.userId, title: u.username }))
+      return usersData?.users.map((u) => ({
+        key: u.userId,
+        title: u.username,
+        chatExists: u.chatExists,
+        requestSent: u.requestSent,
+      }))
     }
     return chatsData?.me.chats.map((c) => ({ key: c.chatId, title: c.displayName }))
   }, [search, usersData?.users, chatsData?.me.chats])
@@ -64,6 +77,7 @@ export default function LayoutContainer() {
       logoutLoading={logoutLoading}
       onFocusChange={handleChangeFocus}
       onSearch={setSearch}
+      onClickItem={handleItemClick}
       onLogout={handleLogout}
     />
   )

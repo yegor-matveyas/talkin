@@ -54,6 +54,12 @@ export class User {
 
   @Field(() => [Chat], { nullable: true })
   chats: Chat[]
+
+  @Field()
+  chatExists: boolean
+
+  @Field()
+  requestSent: boolean
 }
 
 @InputType()

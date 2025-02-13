@@ -15,6 +15,6 @@ export class AuthStrategy extends PassportStrategy(Strategy) {
   }
 
   validate<T extends TCurrentUser>(payload: T): TCurrentUser {
-    return { userId: payload.userId, username: payload.username }
+    return { id: payload.id, userId: payload.userId, username: payload.username }
   }
 }

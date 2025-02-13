@@ -1,7 +1,7 @@
 import { Injectable, Inject, forwardRef } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
 
 import { ChatType, MessageNodeType } from '@types'
 
@@ -28,6 +28,17 @@ export class ChatsService {
 
   async getOneByChatId(chatId: string): Promise<Chat | undefined> {
     return this.chatsRepository.findOne({ where: { chatId } })
+  }
+
+  async getOneByMembers(ids: number[]): Promise<Chat | undefined> {
+    return await this.chatsRepository.findOne({
+      relations: ['members'],
+      where: {
+        chatType: ChatType.DEFAULT,
+        founder: In(ids),
+        members: { id: In(ids) },
+      },
+    })
   }
 
   async createChat(data: CreateChatInput, founder: User) {

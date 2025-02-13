@@ -18,6 +18,6 @@ import { ChatRequestsService } from './requests/requests.service'
     forwardRef(() => MessagesModule),
   ],
   providers: [ChatsResolver, ChatRequestsResolver, ChatsService, ChatRequestsService],
-  exports: [ChatsService, TypeOrmModule],
+  exports: [ChatsService, ChatRequestsService, TypeOrmModule],
 })
 export class ChatsModule {}

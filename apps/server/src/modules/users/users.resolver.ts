@@ -6,6 +6,7 @@ import { AuthGuard, CurrentUser } from '../auth/auth.guard'
 import { TCurrentUser } from '../auth/auth.entity'
 
 import { ChatsService } from '../chats/chats.service'
+import { ChatRequestsService } from '../chats/requests/requests.service'
 import { Chat } from '../chats/chats.entity'
 
 import { UsersService } from './users.service'
@@ -17,7 +18,10 @@ export class UsersResolver {
     private readonly usersService: UsersService,
 
     @Inject(forwardRef(() => ChatsService))
-    private readonly chatsService: ChatsService
+    private readonly chatsService: ChatsService,
+
+    @Inject(forwardRef(() => ChatRequestsService))
+    private readonly chatRequestsService: ChatRequestsService
   ) {}
 
   @UseGuards(AuthGuard)
@@ -49,5 +53,15 @@ export class UsersResolver {
   @ResolveField()
   async chats(@Parent() user: User): Promise<Chat[]> {
     return this.chatsService.getAllByUser(user)
+  }
+
+  @ResolveField()
+  async chatExists(@Parent() user: User, @CurrentUser() currentUser: User): Promise<boolean> {
+    return !!(await this.chatsService.getOneByMembers([user.id, currentUser.id]))
+  }
+
+  @ResolveField()
+  async requestSent(@Parent() user: User, @CurrentUser() currentUser: User): Promise<boolean> {
+    return !!(await this.chatRequestsService.getOneByMembers([user.id, currentUser.id]))
   }
 }

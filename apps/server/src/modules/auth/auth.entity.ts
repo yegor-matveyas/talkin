@@ -47,6 +47,7 @@ export class SignUpInput {
 export type TAuthCredentials = Omit<AuthCredentials, 'id' | 'user'>
 
 export type TCurrentUser = {
+  id: number
   userId: string
   username: string
 }

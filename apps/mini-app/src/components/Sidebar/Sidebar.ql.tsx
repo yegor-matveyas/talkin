@@ -26,6 +26,8 @@ export default {
       users(where: { username: $username }) {
         userId
         username
+        chatExists
+        requestSent
       }
     }
   `,

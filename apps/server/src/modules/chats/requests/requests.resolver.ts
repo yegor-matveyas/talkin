@@ -8,7 +8,9 @@ export class ChatRequestsResolver {
   constructor(private readonly requestsService: ChatRequestsService) {}
 
   @Mutation(() => ChatRequest)
-  async sendRequest(@Args('sendRequestInput') sendRequestInput: SendChatRequestInput): Promise<ChatRequest> {
-    return await this.requestsService.createRequest(sendRequestInput)
+  async sendChatRequest(
+    @Args('sendChatRequestInput') sendChatRequestInput: SendChatRequestInput
+  ): Promise<ChatRequest> {
+    return await this.requestsService.createRequest(sendChatRequestInput)
   }
 }

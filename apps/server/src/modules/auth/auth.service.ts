@@ -43,7 +43,7 @@ export class AuthService {
   }
 
   private async generateTokens(user: User): Promise<AuthCredentials> {
-    const payload = { userId: user.userId, username: user.username }
+    const payload: TCurrentUser = { id: user.id, userId: user.userId, username: user.username }
 
     const existingCreds = await this.credentialsRepository.findOneBy({ user })
     const refreshToken = existingCreds

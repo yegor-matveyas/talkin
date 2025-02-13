@@ -1,4 +1,4 @@
-import { Avatar, Button, SearchInput, Typography } from '@components'
+import { Avatar, Button, Icon, SearchInput, Typography } from '@components'
 
 import { SidebarProps, ItemProps } from './Sidebar.types'
 import styles from './Sidebar.module.scss'
@@ -9,6 +9,7 @@ export default function Sidebar({
   items = [],
   onFocusChange,
   onSearch,
+  onClickItem,
   onLogout,
 }: SidebarProps) {
   console.log('items ', items)
@@ -18,7 +19,7 @@ export default function Sidebar({
       <SearchInput onFocus={onFocusChange} onBlur={onFocusChange} onSearch={onSearch} />
       <div className={styles.items}>
         {items.map((i) => (
-          <Item key={i.key} item={i} />
+          <Item key={i.key} item={i} onClick={onClickItem} />
         ))}
       </div>
       <Button loading={logoutLoading} onClick={onLogout}>
@@ -28,11 +29,12 @@ export default function Sidebar({
   )
 }
 
-function Item({ item }: ItemProps) {
+function Item({ item, onClick }: ItemProps) {
   return (
-    <div className={styles.item}>
+    <div className={styles.item} onClick={() => onClick(item)}>
       <Avatar size="md">{item.title}</Avatar>
       <Typography variant="text">{item.title}</Typography>
+      {item.requestSent && <Icon name="search" />}
     </div>
   )
 }
