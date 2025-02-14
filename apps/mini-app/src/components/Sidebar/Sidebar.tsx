@@ -5,10 +5,14 @@ import { Button, SearchInput } from '@components'
 import Chats from './Chats/Chats'
 import Users from './Users/Users'
 
-import type { SidebarProps } from './Sidebar.types'
 import styles from './Sidebar.module.scss'
 
-export default function Sidebar({ logoutLoading, onLogout }: SidebarProps) {
+type SidebarProps = {
+  logoutLoading?: boolean
+  onLogout: () => void
+}
+
+export default function Sidebar({ logoutLoading = false, onLogout }: SidebarProps) {
   const [isSearching, setIsSearching] = useState<boolean>(false)
   const [username, setUsername] = useState<string>('')
 

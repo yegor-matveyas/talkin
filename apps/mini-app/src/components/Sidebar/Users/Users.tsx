@@ -9,13 +9,13 @@ import ListItem from '../ListItem/ListItem'
 import ql from './Users.ql'
 
 type UsersProps = {
-  username: string
+  username?: string
 }
 
 export default function Users({ username }: UsersProps) {
   const navigate = useNavigate()
 
-  const { data } = useQuery<{ users: TUser[] }>(ql.users, { variables: { username } })
+  const { data } = useQuery<{ users: TUser[] }, UsersProps>(ql.users, { variables: { username } })
 
   const users = useMemo<TUser[]>(() => {
     if (!data?.users) return []
