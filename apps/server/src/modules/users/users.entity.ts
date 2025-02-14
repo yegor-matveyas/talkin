@@ -60,6 +60,9 @@ export class User {
 
   @Field()
   requestSent: boolean
+
+  @Field(() => Chat, { nullable: true })
+  currentChat: Chat
 }
 
 @InputType()

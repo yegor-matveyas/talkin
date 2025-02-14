@@ -61,7 +61,14 @@ export class UsersResolver {
   }
 
   @ResolveField()
+  async currentChat(@Parent() user: User, @CurrentUser() currentUser: User): Promise<Chat | undefined> {
+    if (user.id === currentUser.id) return undefined
+    return await this.chatsService.getOneByMembers([user.id, currentUser.id])
+  }
+
+  @ResolveField()
   async requestSent(@Parent() user: User, @CurrentUser() currentUser: User): Promise<boolean> {
+    if (user.id === currentUser.id) return false
     return !!(await this.chatRequestsService.getOneByMembers([user.id, currentUser.id]))
   }
 }

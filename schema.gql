@@ -138,6 +138,7 @@ scalar UUID
 type User {
   chatExists: Boolean!
   chats: [Chat!]
+  currentChat: Chat
   email: String!
   id: Int!
   receivedChatRequests: [ChatRequest!]!

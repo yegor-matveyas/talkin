@@ -2,11 +2,6 @@ type ListItemFunc = (i: ListItem) => void
 
 export type SidebarProps = {
   logoutLoading?: boolean
-  usersLoading?: boolean
-  items?: ListItem[]
-  onFocusChange: () => void
-  onSearch: (value: string) => void
-  onClickItem: ListItemFunc
   onLogout: () => void
 }
 

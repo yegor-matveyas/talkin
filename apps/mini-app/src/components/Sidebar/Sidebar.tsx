@@ -1,40 +1,27 @@
-import { Avatar, Button, Icon, SearchInput, Typography } from '@components'
+import { useState } from 'react'
 
-import { SidebarProps, ItemProps } from './Sidebar.types'
+import { Button, SearchInput } from '@components'
+
+import Chats from './Chats/Chats'
+import Users from './Users/Users'
+
+import type { SidebarProps } from './Sidebar.types'
 import styles from './Sidebar.module.scss'
 
-export default function Sidebar({
-  usersLoading,
-  logoutLoading,
-  items = [],
-  onFocusChange,
-  onSearch,
-  onClickItem,
-  onLogout,
-}: SidebarProps) {
-  console.log('items ', items)
+export default function Sidebar({ logoutLoading, onLogout }: SidebarProps) {
+  const [isSearching, setIsSearching] = useState<boolean>(false)
+  const [username, setUsername] = useState<string>('')
 
   return (
     <section className={styles.sidebar}>
-      <SearchInput onFocus={onFocusChange} onBlur={onFocusChange} onSearch={onSearch} />
-      <div className={styles.items}>
-        {items.map((i) => (
-          <Item key={i.key} item={i} onClick={onClickItem} />
-        ))}
+      <div className={styles.header}>
+        {isSearching && <Button.Icon name="close" onClick={() => setIsSearching(false)} />}
+        <SearchInput onFocus={() => setIsSearching(true)} onSearch={setUsername} />
       </div>
+      <div className={styles.items}>{isSearching ? <Users username={username} /> : <Chats />}</div>
       <Button loading={logoutLoading} onClick={onLogout}>
         Log out
       </Button>
     </section>
-  )
-}
-
-function Item({ item, onClick }: ItemProps) {
-  return (
-    <div className={styles.item} onClick={() => onClick(item)}>
-      <Avatar size="md">{item.title}</Avatar>
-      <Typography variant="text">{item.title}</Typography>
-      {item.requestSent && <Icon name="search" />}
-    </div>
   )
 }
