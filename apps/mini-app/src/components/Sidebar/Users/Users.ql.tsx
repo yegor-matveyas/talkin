@@ -13,4 +13,16 @@ export default {
       }
     }
   `,
+  sendRequest: gql`
+    mutation sendChatRequest($receiverId: UUID!) {
+      sendChatRequest(sendChatRequestInput: { receiverId: $receiverId }) {
+        id
+        receiver {
+          userId
+          username
+          requestSent
+        }
+      }
+    }
+  `,
 }

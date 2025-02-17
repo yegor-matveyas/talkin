@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useMutation } from '@apollo/client'
 
 import { useQuery } from '@hooks'
 import { TUser } from '@types'
@@ -17,21 +18,30 @@ export default function Users({ username }: UsersProps) {
 
   const { data } = useQuery<{ users: TUser[] }, UsersProps>(ql.users, { variables: { username } })
 
+  const [sendRequest] = useMutation(ql.sendRequest)
+
   const users = useMemo<TUser[]>(() => {
     if (!data?.users) return []
     return data.users
   }, [data?.users])
 
   const handleClick = useCallback(
-    (user: TUser) => {
+    async (user: TUser) => {
       if (user.currentChat) {
-        navigate('/chats/' + user.currentChat?.chatId)
+        navigate('/chats/' + user.currentChat.chatId)
       } else if (!user.requestSent) {
-        console.log('Send request')
+        await sendRequest({ variables: { receiverId: user.userId } })
       }
     },
-    [navigate]
+    [navigate, sendRequest]
   )
 
-  return users.map((u) => <ListItem text={u.username} onClick={() => handleClick(u)} />)
+  return users.map((u) => (
+    <ListItem
+      key={u.userId}
+      text={u.username}
+      onClick={() => handleClick(u)}
+      endIcon={u.requestSent ? 'menu' : undefined}
+    />
+  ))
 }

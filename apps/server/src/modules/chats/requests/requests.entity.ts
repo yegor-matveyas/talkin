@@ -24,8 +24,5 @@ export class ChatRequest {
 @InputType()
 export class SendChatRequestInput {
   @Field(() => UUIDScalar)
-  senderId: string
-
-  @Field(() => UUIDScalar)
   receiverId: string
 }

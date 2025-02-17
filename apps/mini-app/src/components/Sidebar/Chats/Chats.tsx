@@ -26,5 +26,5 @@ export default function Chats() {
     [navigate]
   )
 
-  return chats.map((c) => <ListItem text={c.displayName} onClick={() => handleClick(c)} />)
+  return chats.map((c) => <ListItem key={c.chatId} text={c.displayName} onClick={() => handleClick(c)} />)
 }

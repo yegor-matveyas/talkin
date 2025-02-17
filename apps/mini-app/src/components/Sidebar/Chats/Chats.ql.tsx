@@ -5,7 +5,8 @@ export default {
     query me {
       me {
         chats {
-          id
+          chatId
+          displayName
         }
       }
     }
